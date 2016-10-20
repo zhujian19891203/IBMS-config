@@ -165,11 +165,8 @@ $(function() {
                 ajaxPost(basePath+'/user/save', params, function(data, status) {
                     if(data.success){
                         if(id!="0"){//更新
-                            modals.hideWin(winId);
                             userTable.reloadRowData(id);
                         }else{//新增
-                            //modals.info("数据保存成功");
-                            modals.hideWin(winId);
                             userTable.reloadData();
                         }
                     }

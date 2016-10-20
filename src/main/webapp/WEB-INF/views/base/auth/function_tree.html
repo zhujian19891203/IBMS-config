@@ -378,8 +378,8 @@
 				//选择图标按钮只读
 				$("#selectIcon").addClass("disabled");
 				//还原校验框
-				if(form.data('bootstrapValidator'))
-				form.data('bootstrapValidator').resetForm();  
+				if($("function-form").data('bootstrapValidator'))
+					$("function-form").data('bootstrapValidator').resetForm();
 			}
 			
 			function formWritable(action){

@@ -326,8 +326,8 @@
 				//还原新增、编辑、删除按钮样式
 				$(".box-header button").removeClass("btn-primary").addClass("btn-default");
 				//还原校验框
-				if(form.data('bootstrapValidator'))
-				form.data('bootstrapValidator').resetForm();  
+				if($("#dict-form").data('bootstrapValidator'))
+				 	$("#dict-form").data('bootstrapValidator').resetForm();
 			}
 			
 			function formWritable(action){
