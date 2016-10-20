@@ -92,7 +92,7 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
             return;
         }
 
-        // 校验成功 刷新token 可以防止重复提交
+        // 校验成功 刷新token 可以防止重复提交  xrq不为空则为ajax方法
         VerifyCSRFToken verifyAnnotation = method.getAnnotation(VerifyCSRFToken.class);
         if (verifyAnnotation != null) {
             if (verifyAnnotation.verify()) {
@@ -119,7 +119,9 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
         // 请求中的CSRFToken
         String requstCSRFToken = request.getHeader("CSRFToken");
         if (StrUtil.isEmpty(requstCSRFToken)) {
-            return false;
+            //return false;
+            //if there is no csrftoken from web ,then no csrf check
+            return true;
         }
         String sessionCSRFToken = (String) request.getSession().getAttribute("CSRFToken");
         if (StrUtil.isEmpty(sessionCSRFToken)) {
