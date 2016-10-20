@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.cnpc.framework.annotation.RefreshCSRFToken;
+import com.cnpc.framework.annotation.VerifyCSRFToken;
 import com.cnpc.framework.base.entity.User;
 import com.cnpc.framework.base.pojo.PageInfo;
 import com.cnpc.framework.base.pojo.Result;
@@ -41,8 +43,9 @@ public class UserController {
      *
      * @return
      */
+    @RefreshCSRFToken
     @RequestMapping(method = RequestMethod.GET, value = "/edit")
-    private String eidt(String id, HttpServletRequest request) {
+    private String edit(String id, HttpServletRequest request) {
 
         request.setAttribute("id", id);
         return "base/user/user_edit";
@@ -55,6 +58,7 @@ public class UserController {
         return userService.get(User.class, id);
     }
 
+    @VerifyCSRFToken
     @RequestMapping(method = RequestMethod.POST, value = "/save")
     @ResponseBody
     private Result saveUser(User user) {
@@ -91,6 +95,17 @@ public class UserController {
         map.put("pageInfo", pageInfo);
         map.put("data", userService.getListByCriteria(criteria, pageInfo));
         return map;
+    }
+
+    /**
+     * tab方式curd demo
+     *
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/tab/list")
+    private String tablist() {
+
+        return "base/user/user_tab_list";
     }
 
 }

@@ -569,6 +569,7 @@ var basePath="${basePath}";//给外部js文件传递路径参数
 
 <script type="text/javascript" src="${basePath}/resources/common/js/base.js"></script>
 <script type="text/javascript" src="${basePath}/resources/common/js/base-modal.js"></script>
+<script type="text/javascript" src="${basePath}/resources/common/js/base-form.js"></script>
 <!-- 加入页面的的脚本 -->
 <script>
    //加载菜单
@@ -595,7 +596,8 @@ var basePath="${basePath}";//给外部js文件传递路径参数
    
    $(function(){ 
 	   //首页默认加载
-	   loadPage("${basePath}/homePage"); 
+	   //loadPage("${basePath}/homePage"); 
+	   loadPage("${basePath}/user/tab/list")
 	   $("a[data-url]").click(function(evt){
 		   loadPage($(this).data("url"));
 		   $("ul.treeview-menu li").removeClass("active");

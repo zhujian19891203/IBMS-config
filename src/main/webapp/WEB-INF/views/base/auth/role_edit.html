@@ -1,6 +1,6 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><li class="fa fa-remove"></li></button>
-	<h4 class="modal-title">新增用户</h4>
+	<h5 class="modal-title">新增用户</h5>
 </div>
 
 <div class="modal-body">
@@ -51,8 +51,8 @@
 		</div>
 		<!-- /.box-body -->
 		<div class="box-footer text-right">
-			<button type="button" class="btn btn-default" action_type="cancel" data-dismiss="modal">取消</button>
-			<button type="submit" class="btn btn-primary" action_type="save">提交</button>
+			<button type="button" class="btn btn-default" data-btn-type="cancel" data-dismiss="modal">取消</button>
+			<button type="submit" class="btn btn-primary" data-btn-type="save">提交</button>
 		</div>
 		<!-- /.box-footer -->
 	</form>
@@ -60,11 +60,11 @@
 </div>
 <script>
 	//tableId,queryId,conditionContainer
-	var form = $("#role-form");
+	var form = null;
 	var id="${id?default(0)}";
 	$(function() {
 		//数据校验
-		form.bootstrapValidator({
+		$("#role-form").bootstrapValidator({
 			message : '请输入有效值',
 			feedbackIcons : {
 				valid : 'glyphicon glyphicon-ok',
@@ -74,7 +74,7 @@
 			submitHandler : function(validator, form, submitButton) {
 				modals.confirm('确认保存？', function() {
 					//Save Data，对应'submit-提交'
-					var params = getFormSimpleData('role-form');
+					var params = form.getFormSimpleData();
 					ajaxPost(basePath+'/role/save', params, function(data, status) {
 						if(data.success){
 							if(id!="0"){//更新
@@ -134,18 +134,18 @@
 			}
 		});
 		//初始化控件
-		initFormComponent("role-form");
+		form=$("#role-form").form();
 		//回填id		
 		if(id!="0"){
 			ajaxPost(basePath+"/role/get",{id:id},function(data){
-				initFormData('role-form',data);
+				form.initFormData(data);
 			})
 		}
 	});
 	
 	
 	function resetForm(){
-		clearForm('role-form');
+		form.clearForm();
         form.data('bootstrapValidator').resetForm();  
 	}
 </script>

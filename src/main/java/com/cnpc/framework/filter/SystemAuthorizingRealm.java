@@ -17,7 +17,7 @@ import com.cnpc.framework.base.entity.User;
 import com.cnpc.framework.base.service.UserService;
 
 /**
- * @author bin 系统安全认证实现类
+ * @author 系统安全认证实现类
  * 
  */
 @Service

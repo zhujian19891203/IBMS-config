@@ -279,14 +279,12 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.2.1.v20140609</version>
 				<configuration>
+					<httpConnector>
+						<port>8080</port>
+					</httpConnector>
 					<webAppConfig>
 						<contextPath>/AdminEAP</contextPath>
 					</webAppConfig>
-					<connectors>
-						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-							<port>8080</port>
-						</connector>
-					</connectors>
 				</configuration>
 			</plugin>
 		</plugins>

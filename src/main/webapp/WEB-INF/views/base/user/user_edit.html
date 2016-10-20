@@ -1,6 +1,6 @@
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><li class="fa fa-remove"></li></button>
-	<h4 class="modal-title">新增用户</h4>
+	<h5 class="modal-title">新增用户</h5>
 </div>
 
 <div class="modal-body">
@@ -11,6 +11,7 @@
 		<input type="hidden" name="isSuperAdmin">
 		<input type="hidden" name="createDateTime" data-flag="date" data-format="yyyy-MM-dd HH:mm:ss">
 		<input type="hidden" name="deleted">
+		<input type='hidden' value='${CSRFToken}' id='csrftoken'>
 		<div class="box-body">
 			<div class="col-md-6">
 				<div class="form-group">
@@ -25,7 +26,7 @@
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="text" class="form-control" data-flag="datepicker" data-format="yyyy-MM-dd" name="birthday" id="datepicker"
+						<input type="text" class="form-control" data-flag="datepicker" data-format="yyyy-MM-dd" id="birthday" name="birthday"
 							placeholder="出生日期">
 					</div>
 				</div>
@@ -81,8 +82,8 @@
 		<!-- /.box-body -->
 		<div class="box-footer text-right">
 			<!--以下两种方式提交验证,根据所需选择-->
-			<button type="button" class="btn btn-default" action_type="cancel" data-dismiss="modal">取消</button>
-			<button type="submit" class="btn btn-primary" action_type="save">提交</button>
+			<button type="button" class="btn btn-default" data-btn-type="cancel" data-dismiss="modal">取消</button>
+			<button type="submit" class="btn btn-primary" data-btn-type="save">提交</button>
 		</div>
 		<!-- /.box-footer -->
 	</form>
@@ -90,11 +91,11 @@
 </div>
 <script>
 	//tableId,queryId,conditionContainer
-	var form = $("#user-form");
+	var form =null;
 	var id="${id?default(0)}";
 	$(function() {
 		//数据校验
-		form.bootstrapValidator({
+		$("#user-form").bootstrapValidator({
 			message : '请输入有效值',
 			feedbackIcons : {
 				valid : 'glyphicon glyphicon-ok',
@@ -104,7 +105,7 @@
 			submitHandler : function(validator, form, submitButton) {
 				modals.confirm('确认保存？', function() {
 					//Save Data，对应'submit-提交'
-					var params = getFormSimpleData('user-form');
+					var params = form.getFormSimpleData();
 					ajaxPost(basePath+'/user/save', params, function(data, status) {
 						if(data.success){
 							if(id!="0"){//更新
@@ -166,18 +167,18 @@
 			}
 		});
 		//初始化控件
-		initFormComponent("user-form");
+		form=$("#user-form").form();
 		//回填id		
 		if(id!="0"){
 			ajaxPost(basePath+"/user/get",{id:id},function(data){
-				initFormData('user-form',data);
+				form.initFormData(data);
 			})
 		} 
 	});
 	
 	
 	function resetForm(){
-		clearForm('user-form');
+		form.clearForm();
         form.data('bootstrapValidator').resetForm();  
 	}
 </script>

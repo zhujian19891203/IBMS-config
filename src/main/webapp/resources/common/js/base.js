@@ -28,25 +28,82 @@ function loadPage(url){
 	});
 }
  
+/**
+ * Load a url into a page
+ */
+jQuery.fn.load = function( url, params, callback ) {
+	var selector, type, response,
+		self = this,
+		off = url.indexOf( " " );
+	if ( off > -1 ) {
+		selector = jQuery.trim( url.slice( off ) );
+		url = url.slice( 0, off );
+	}
+	if ( jQuery.isFunction( params ) ) {
+		callback = params;
+		params = undefined;
+	} else if ( params && typeof params === "object" ) {
+		type = "POST";
+	}
+	if ( self.length > 0 ) {
+		jQuery.ajax( {
+			url: url,
+			beforeSend: function( xhr ) {  
+				    xhr.setRequestHeader('X-Requested-With', {toString: function(){ return ''; }});  
+			},  
+			type: type || "GET", 
+			dataType: "html",
+			data: params
+		} ).done( function( responseText ) {
+			response = arguments;
+			self.html( selector ?
+				jQuery( "<div>" ).append( jQuery.parseHTML( responseText ) ).find( selector ) :
+				responseText );
+		} ).always( callback && function( jqXHR, status ) {
+			self.each( function() {
+				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
+			} );
+		} );
+	}
+
+	return this;
+};
+
+
+
 function ajaxPost(url, params, callback) {
 	var result = null;
-
+    var headers={};
+    headers['CSRFToken']=$("#csrftoken").val();
+    
 	$.ajax({
 		type : 'post',
 		async : false,
 		url : url,
 		data : params,
 		dataType : 'json',
+		headers:headers,
 		success : function(data, status) {
 			result = data;
-
-			if (callback) {
+			if(data&&data.code&&data.code=='101'){
+				modals.error("操作失败，请刷新重试，具体错误："+data.message);
+				return false;
+			}
+			if (callback) { 
 				callback.call(this, data, status);
 			}
 		},
 		error : function(err, err1, err2) {
-			// console.error(JSON.stringify(err)+'<br/>err1:'+
-			// JSON.stringify(err1)+'<br/>err2:'+JSON.stringify(err2));
+		    if(err && err.readyState && err.readyState == '4'){
+                var responseBody = err.responseText;
+                if(responseBody){   
+                	 responseBody = "{'retData':"+responseBody;
+                     var resJson = eval('(' + responseBody + ')');
+                     $("#csrftoken").val(resJson.csrf.CSRFToken);
+                     this.success(resJson.retData, 200);
+                }
+                return ;
+            } 		    
 			modals.error({
 				text : JSON.stringify(err) + '<br/>err1:' + JSON.stringify(err1) + '<br/>err2:' + JSON.stringify(err2),
 				large : true
@@ -57,200 +114,6 @@ function ajaxPost(url, params, callback) {
 	return result;
 }
 
-/**
- * 获取初始化form表单组件
- * 
- * @param form_flag
- */
-function initFormComponent(form_flag) {
-	var form = $('#' + form_flag);
-	form = form.length == 0 ? $('form[name="' + form_flag + '"]') : form;
-	//给form表单增加BaseEntity中的属性
-	if(form.find('[name="deleted"]').length==0){
-		form.prepend("<input type='hidden' name='deleted'>");
-	}
-	if(form.find(':hidden[name="createDateTime"]').length==0){
-		form.prepend('<input type="hidden" name="createDateTime" data-flag="date" data-format="yyyy-MM-dd HH:mm:ss">');
-	} 
-	if(form.find(':hidden[name="version"]').length==0){
-		form.prepend("<input type='hidden' name='version'>");
-	}
-	if(form.find(':hidden[name="id"]').length==0){
-		form.prepend("<input type='hidden' id='id' name='id'>");
-	}
-	// icheck
-	if(form.find('[data-flag="icheck"]').length>0){
-		form.find('[data-flag="icheck"]').iCheck({
-			checkboxClass : 'icheckbox_square-green',
-			radioClass : 'iradio_square-green'
-		}).on('ifChanged', function(e) {
-			// Get the field name
-			var field = $(this).attr('name');
-			form
-			// Mark the field as not validated
-			.bootstrapValidator('updateStatus', field, 'NOT_VALIDATED')
-			// Validate field
-			.bootstrapValidator('validateField', field);
-		});
-	}
-	// datepicker
-	if(form.find('[data-flag="datepicker"]').length>0){
-		form.find('[data-flag="datepicker"]').datepicker({
-			autoclose : true,
-			format : 'yyyy-mm-dd',
-			language : 'cn'
-		}).on('change', function(e) {
-			// Validate the date when user change it
-			var field = $(this).attr('name');
-			// Get the bootstrapValidator instance
-			form.data('bootstrapValidator')
-			// Mark the field as not validated, so it'll be re-validated when the
-			// user change date
-			.updateStatus(field, 'NOT_VALIDATED', null)
-			// Validate the field
-			.validateField(field);
-		}).parent().css("padding-left","15px").css("padding-right","15px");
-	}
-}
-
-/**
- * 获取表单信息
- * 
- * @param form_flag
- *            form id or name
- * @returns {{}}
- */
-function getFormSimpleData(form_flag) {
-	var datas = {};
-   
-	if (!form_flag)
-		return datas;
-
-	var form = $('#' + form_flag);
-	form = form.length == 0 ? $('form[name="' + form_flag + '"]') : form;
-
-	if (form.length == 0)
-		return datas;
-
-	var elems = form.find('input[name], select[name], textarea[name]');
-
-	// 设置datas属性
-	elems.each(function(ind, elem) {
-		var el_name = elem.name;
-
-		if (!el_name)
-			return;
-
-		var assembly = function(name) {
-			var res = {}, sind = name.indexOf('.');
-			res[sind > -1 ? name.substring(0, sind) : name] = sind > -1 ? assembly(name.substring(sind + 1)) : '';
-
-			return res;
-		};
-
-		var ind = el_name.indexOf('.');
-		datas[ind > -1 ? el_name.substring(0, ind) : el_name] = ind > -1 ? assembly(el_name.substring(ind + 1)) : '';
-	});
-
-	// 设置datas属性值
-	elems.each(function(ind, elem) {
-		var el_name = elem.name, is_radio = elem.type == 'radio', is_ckbox = elem.type == 'checkbox';
-
-		if (!el_name || ((is_radio || is_ckbox) && !elem.checked))
-			return;
-
-		var old_val = eval('datas.' + el_name); // checkbox值用逗号分割
-		eval('datas.' + el_name + '="' + (is_ckbox ? (old_val ? (old_val + ',') : '') : '') + elem.value + '"');
-	});
-
-	return datas;
-}
-
-/**
- * 初始化表单信息
- * 
- * @param form_flag
- *            form id or name
- * @param json_data {}
- */
-function initFormData(form_flag, json_data) {
-	if (!json_data || !form_flag)
-		return;
-
-	var form = $('#' + form_flag);
-	form = form.length == 0 ? $('form[name="' + form_flag + '"]') : form;
-
-	if (form.length == 0)
-		return;
-
-	form.find('input[name], select[name], textarea[name], label[name]').each(function(ind, elem) {
-		var obj = $(elem), el_name = obj.attr('name'), value;
-
-		try {
-			value = eval('json_data.' + el_name);
-		} catch (e) {
-			value = null;
-		}
-        
-		if (value != undefined && value != null && $.trim(value) != '') {
-			var is_radio = elem.type == 'radio', is_ckbox = elem.type == 'checkbox';
-            var is_date=$(elem).data("flag")=="datepicker"||$(elem).data("flag")=="date";
-            var date_format=$(elem).data("format")||"yyyy-MM-dd";
-            if(is_date) 
-            	value=formatDate(value,date_format);
-			if (is_radio) {  
-				//icheck
-				if($(elem).data("flag")=="icheck"){
-					$(elem).iCheck( elem.value == value?'check':'uncheck');
-					form.data('bootstrapValidator').updateStatus(el_name, 'NOT_VALIDATED', null);
-				}else{
-					//原生radio
-					elem.checked = elem.value == value;
-				}
-			} else if (is_ckbox) {
-				//icheck
-				if($(elem).data("flag")=="icheck"){
-					$(elem).iCheck($.inArray(elem.value, value.split(',')) > -1?'check':'uncheck');
-					form.data('bootstrapValidator').updateStatus(el_name, 'NOT_VALIDATED', null);
-				}else{
-					//原生checkbox 
-					elem.checked = $.inArray(elem.value, value.split(',')) > -1 ? true : false;
-				}
-			} else if (elem.tagName.toUpperCase() == 'LABEL') {
-				elem.innerText = value;
-			} else {
-				elem.value = value;
-			}
-		}
-	});
-}
-
-/**
- * 清空表单
- * 
- * @param form_flag
- *            form id or name
- */
-function clearForm(form_flag) {
-	if (form_flag) {
-		var form = $('#' + form_flag);
-		form = form.length == 0 ? $('form[name="' + form_flag + '"]') : form;
-
-		form.find(':input[name]:not(:radio)').val('');
-		form.find(':radio').attr('checked', false);
-		form.find(':radio[data-flag]').iCheck('update');  
-		form.find(':checkbox').attr('checked', false);
-		form.find(':checkbox[data-flag]').iCheck('update');
-		form.find('label[name]').text('');
-	} else {
-		$(':input[name]:not(:radio)').val('');
-		$(':radio').removeAttr('checked');
-		$(':radio[data-flag]').iCheck('update');
-		$(':checkbox').removeAttr('checked');
-		$(':checkbox[data-flag]').iCheck('update');
-		$('label[name]').text('');
-	}
-}
 
 /**
  * 格式化日期

@@ -50,10 +50,10 @@
                             <div class="box">
                                 <div class="box-header">
                                     <div class="pull-right">
-                                        <button type="button" class="btn btn-default" action_type="export">导出</button>
-                                        <button type="button" class="btn btn-primary" action_type="add">新增</button>
-                                        <button type="button" class="btn btn-default" action_type="edit">编辑</button>
-                                        <button type="button" class="btn btn-default" action_type="delete">删除</button>
+                                        <button type="button" class="btn btn-default" data-btn-type="export">导出</button>
+                                        <button type="button" class="btn btn-primary" data-btn-type="add">新增</button>
+                                        <button type="button" class="btn btn-default" data-btn-type="edit">编辑</button>
+                                        <button type="button" class="btn btn-default" data-btn-type="delete">删除</button>
                                     </div>
                                 </div>
                                 <!-- /.box-header -->
@@ -183,10 +183,10 @@
                                     </div>
                                     <!-- /.box-body -->
                                     <div class="box-footer text-right">
-                                        <button type="button" class="btn btn-default" action_type="cancel">取消</button>
+                                        <button type="button" class="btn btn-default" data-btn-type="cancel">取消</button>
 
                                         <!--以下两种方式提交验证,根据所需选择-->
-                                        <button type="button" class="btn btn-info" action_type="save">button-保存</button>
+                                        <button type="button" class="btn btn-info" data-btn-type="save">button-保存</button>
                                         <button type="submit" class="btn btn-info">submit-保存</button>
                                     </div>
                                     <!-- /.box-footer -->
@@ -257,8 +257,8 @@
                 });
 
                 //表单验证根据所需进行配置,在此只进行简单验证
-                var form = $('#user-form');
-                form.bootstrapValidator({
+                var form = $("#user-form").form();
+                $("#user-form").bootstrapValidator({
                     message: '请输入有效值',
                     feedbackIcons: {
                         valid: 'glyphicon glyphicon-ok',
@@ -268,7 +268,7 @@
                     submitHandler: function(validator, form, submitButton) {
                         modals.confirm('确认保存？', function() {
                             //Save Data，对应'submit-保存'
-                            var params = getFormSimpleData('user-form');
+                            var params = form.getFormSimpleData();
 
                             ajaxPost('/userDemo/saveUser', params, function(data, status) {
                                 //提示以及其他逻辑
@@ -310,8 +310,8 @@
                 });
 
                 //Action Events
-                $('button[action_type]').click(function() {
-                    var action = $(this).attr('action_type');
+                $('button[data-btn-type]').click(function() {
+                    var action = $(this).attr('data-btn-type');
 
                     switch (action) {
                         case 'export':
@@ -319,7 +319,7 @@
 //                            modals.info({ text: '123', title: 'cc' });
                             break;
                         case 'add':
-                            clearForm('user-form');
+                            form.clearForm();
                             form.data('bootstrapValidator').resetForm();
                             $('#nav-tab-edit').click();
                             break;
@@ -332,7 +332,7 @@
                                 data.testBox = 'a,b,c,d';
                                 data.testLab = { name: 'ggh' };*/
 
-                                initFormData('user-form', data);
+                                form.initFormData(data);
 
                                 form.data('bootstrapValidator').resetForm();
                                 $('#nav-tab-edit').click();
@@ -357,7 +357,7 @@
                             //Save Data，对应'button-保存'
                             form.bootstrapValidator('validate');
                             if (form.data('bootstrapValidator').isValid()) {
-                                var params = getFormSimpleData('user-form');
+                                var params = form.getFormSimpleData();
 
                                 modals.confirm('确认保存？', function() {
                                     ajaxPost('/userDemo/saveUser', params, function(data, status) {
@@ -371,7 +371,7 @@
                             break;
                         case 'cancel':
                             //Clear Form
-                            clearForm('user-form');
+                            form.clearForm();
                             form.data('bootstrapValidator').resetForm();
                             $('#nav-tab-list').click();
                             break;

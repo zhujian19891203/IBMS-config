@@ -66,7 +66,7 @@
 
         // //<h4 class="modal-title">Modal title</h4>
         if (config.title) {
-            var title = document.createElement('H4');
+            var title = document.createElement('H5');
             title.id = 'myModalLabel';
             title.className = 'modal-title';
             title.innerHTML = /* '<i class="fa fa-fw fa-info-circle"></i>'+ */config.title;

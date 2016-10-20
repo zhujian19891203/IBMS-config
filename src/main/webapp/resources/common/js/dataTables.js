@@ -27,9 +27,9 @@ function CommonTable(tableId, queryId, searchDiv,config) {
 	this.dataCache = dataCache;
 	this.dataCache.data("queryId", this.queryId);
 	//
-	var searchButton = $("#" + searchDiv + " button[action_type='search']");
+	var searchButton = $("#" + searchDiv + " button[data-btn-type='search']");
 	this.searchButton = searchButton;
-	var resetButton = $("#" + searchDiv + " button[action_type='reset']");
+	var resetButton = $("#" + searchDiv + " button[data-btn-type='reset']");
 	this.resetButton=resetButton;
 	// 表格横向自适应 
 	$("#" + this.tableId).css("width", "100%");

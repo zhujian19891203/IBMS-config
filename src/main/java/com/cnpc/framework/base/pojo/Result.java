@@ -21,6 +21,11 @@ public class Result {
      */
     private String message;
 
+    /**
+     * 返回状态码
+     */
+    private String code;
+
     public Result() {
 
         this.success = true;
@@ -44,10 +49,40 @@ public class Result {
         this.message = message;
     }
 
+    public Result(boolean success, Object data, String message, String code) {
+
+        this.success = success;
+        this.data = data;
+        this.message = message;
+        this.code = code;
+    }
+
     public Result(boolean success, String message) {
 
         this.success = success;
         this.message = message;
+    }
+
+    public Result(String code, String message) {
+
+        this.code = code;
+        this.message = message;
+    }
+
+    public Result(ResultCode rc) {
+
+        this.code = rc.getCode();
+        this.message = rc.getMessage();
+    }
+
+    public String getCode() {
+
+        return code;
+    }
+
+    public void setCode(String code) {
+
+        this.code = code;
     }
 
     public boolean isSuccess() {

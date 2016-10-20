@@ -28,10 +28,10 @@
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<div class="btn-group">
-						    <button type="button" class="btn btn-default" action_type="addRoot"><li class="fa fa-plus">&nbsp;新增根字典</li></button>
-							<button type="button" class="btn btn-default" action_type="add"><li class="fa fa-plus">&nbsp;新增下级字典</li></button>
-							<button type="button" class="btn btn-default" action_type="edit"><li class="fa fa-edit">&nbsp;编辑当前字典</li></button>
-							<button type="button" class="btn btn-default" action_type="delete"><li class="fa fa-remove">&nbsp;删除当前字典</li></button>
+						    <button type="button" class="btn btn-default" data-btn-type="addRoot"><li class="fa fa-plus">&nbsp;新增根字典</li></button>
+							<button type="button" class="btn btn-default" data-btn-type="add"><li class="fa fa-plus">&nbsp;新增下级字典</li></button>
+							<button type="button" class="btn btn-default" data-btn-type="edit"><li class="fa fa-edit">&nbsp;编辑当前字典</li></button>
+							<button type="button" class="btn btn-default" data-btn-type="delete"><li class="fa fa-remove">&nbsp;删除当前字典</li></button>
 						</div>
 						<!-- /.box-tools -->
 					</div>
@@ -94,7 +94,7 @@
 							</div>
 		                    <div class="box-footer" style="display:none">
 								<div class="text-center">
-									<button type="button" class="btn btn-default" action_type="cancel">
+									<button type="button" class="btn btn-default" data-btn-type="cancel">
 										<i class="fa fa-reply" >&nbsp;取消</i>
 									</button>
 									<button type="submit" class="btn btn-primary">
@@ -114,14 +114,14 @@
 	</section>
 
    <script>
-			var form = $('#dict-form');
+			var form =null;
 			$(function() {
 				//初始化form表单
-				initFormComponent('dict-form');
+				form=$("#dict-form").form();
 
 				initTree(0); 
 				//初始化校验
-				form.bootstrapValidator({
+				$("#dict-form").bootstrapValidator({
 					message : '请输入有效值',
 					feedbackIcons : {
 						valid : 'glyphicon glyphicon-ok',
@@ -131,7 +131,7 @@
 					submitHandler : function(validator, form, submitButton) {
 						modals.confirm('确认保存？', function() {
 							//Save Data，对应'submit-提交'
-							var params = getFormSimpleData('dict-form');
+							var params = form.getFormSimpleData();
 							ajaxPost(basePath + '/dict/save', params, function(data, status) {
 								if (data.success) {
 									//var id=$("input[name='id']").val();
@@ -188,14 +188,14 @@
 				
 				//按钮事件
 				var btntype=null;
-				$('button[action_type]').click(function() {
-					var action = $(this).attr('action_type');
+				$('button[data-btn-type]').click(function() {
+					var action = $(this).attr('data-btn-type');
 					var selectedArr=$("#tree").data("treeview").getSelected();
 					var selectedNode=selectedArr.length>0?selectedArr[0]:null;
 					switch (action) {
 					case 'addRoot':
 						formWritable(action);
-						clearForm('dict-form');
+						form.clearForm();
 						//填充上级字典和层级编码
 						fillParentAndLevelCode(null);
 						btntype='add';
@@ -206,7 +206,7 @@
 							return false;
 						}
 						formWritable(action);
-						clearForm('dict-form');
+						form.clearForm();
 						//填充上级字典和层级编码
 						fillParentAndLevelCode(selectedNode);
 						btntype='add';
@@ -230,7 +230,7 @@
 						if(btntype=='add')
 							fillDictForm(selectedNode);
 						formReadonly();
-						$(".box-header button[action_type='delete']").removeClass("btn-default").addClass("btn-primary");
+						$(".box-header button[data-btn-type='delete']").removeClass("btn-default").addClass("btn-primary");
 					    if(selectedNode.nodes){
 					    	modals.info('该节点含有子节点，请先删除子节点');
 					    	return false;
@@ -311,9 +311,9 @@
 			
 			//填充form
 			function fillDictForm(node){
-				clearForm('dict-form');		
+				form.clearForm();
 				ajaxPost(basePath+"/dict/get/"+node.id,null,function(data){
-					initFormData('dict-form',data);
+					form.initFormData(data);
 				})
 			}
 			
@@ -335,7 +335,7 @@
 				$("#dict-form .box-footer").show();
 				$(".box-header button").removeClass("btn-primary").addClass("btn-default");
 				if(action)
-					$(".box-header button[action_type='"+action+"']").removeClass("btn-default").addClass("btn-primary");
+					$(".box-header button[data-btn-type='"+action+"']").removeClass("btn-default").addClass("btn-primary");
 			}
 			
 			
