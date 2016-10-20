@@ -158,7 +158,7 @@ $(function() {
             invalid : 'glyphicon glyphicon-remove',
             validating : 'glyphicon glyphicon-refresh'
         },
-        submitHandler : function(validator, form, submitButton) {
+        submitHandler : function(validator, userform, submitButton) {
             modals.confirm('确认保存？', function() {
                 //Save Data，对应'submit-提交'
                 var params = form.getFormSimpleData();
