@@ -255,6 +255,18 @@
 		  <artifactId>jxls-reader</artifactId>
 		  <version>1.0.5</version>
 		</dependency>
+		<!--csv reader-->
+		<dependency>
+			<groupId>net.sf.supercsv</groupId>
+			<artifactId>super-csv</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<!--testng-->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.10</version>
+		</dependency>
 	</dependencies>
  
 	<build>

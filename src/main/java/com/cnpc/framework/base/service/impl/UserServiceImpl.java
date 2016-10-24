@@ -21,4 +21,10 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
         return baseDao.find("from User");
     }
 
+    public User getUserByLoginName(String loginName){
+        return this.get("from User where loginName='"+loginName+"'");
+    }
+
+
+
 }
