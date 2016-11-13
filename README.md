@@ -5,9 +5,9 @@ Introduction
 
 **Download & Preview on [AdminEAP]** -- demo will be published later. 
 
-**AdminEAP** -- AdminEAP是一个基于**[AdminLTE](https://github.com/almasaeed2010/AdminLTE)**的企业应用开发平台，AdminEAP可高度定制化而易于使用，能够适配多种分辨率的终端设备，包括从小型移动设备到大的桌面设备，通过使用AdminEAP能够快速构建应用管理系统。  
+**AdminEAP** -- **[AdminEAP](http://www.admineap.com)**是一个基于**[AdminLTE](https://github.com/almasaeed2010/AdminLTE)**的企业应用开发平台，AdminEAP可高度定制化而易于使用，能够适配多种分辨率的终端设备，包括从小型移动设备到大的桌面设备，通过使用AdminEAP能够快速构建应用管理系统。  
 
-**下载 & 预览 [AdminEAP］**　--DEMO 见**[http://60.205.150.188:8080/AdminEAP/](http://60.205.150.188:8080/AdminEAP/)**
+**下载 & 预览 [AdminEAP］(http://www.admineap.com)**　--DEMO 见**[http://www.admineap.com](http://www.admineap.com)**
 
 
 What AdminEAP looks like (can do) ?
