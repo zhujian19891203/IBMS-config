@@ -136,17 +136,22 @@ CommonTable.prototype.fnInitComplete = function(oSettings, json) {
 	//行单选 	
 	if(oSettings.oInit.singleSelect){
 	    $('#'+this.tableId+' tbody').on( 'click', 'tr', function () {
-	        if ( $(this).hasClass('selected') ) {
+			//HNAZO modify
+	        /*if ( $(this).hasClass('selected') ) {
 	            $(this).removeClass('selected');
-	        }
-	        else {
+	        } else {
 	            _this.table.$('tr.selected').removeClass('selected');
 	            $(this).addClass('selected');
-	        } 
-	        if(oSettings.oInit.rowClick){
-	        	oSettings.oInit.rowClick.call(this,_this.getSelectedRowData(),$(this).hasClass('selected'));
-	        }
-	     });  
+	        } */
+			if (!$(this).hasClass('selected')) {
+				_this.table.$('tr.selected').removeClass('selected');
+				$(this).addClass('selected');
+
+				if(oSettings.oInit.rowClick){
+					oSettings.oInit.rowClick.call(this,_this.getSelectedRowData(),$(this).hasClass('selected'));
+				}
+			}
+	     });
 	}else{ 
 		$('#'+this.tableId+' tbody').on( 'click', 'tr', function (){
 			 $(this).toggleClass('selected');
