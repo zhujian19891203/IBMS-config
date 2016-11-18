@@ -498,12 +498,13 @@
          * @returns {BootstrapValidator}
          */
         disableSubmitButtons: function(disabled) {
-            if (!disabled) {
+            //HANZO modify
+            /*if (!disabled) {
                 this.$form.find(this.options.submitButtons).removeAttr('disabled');
             } else if (this.options.live != 'disabled') {
                 // Don't disable if the live validating mode is disabled
                 this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
-            }
+            }*/
 
             return this;
         },
