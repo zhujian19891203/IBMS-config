@@ -384,3 +384,6 @@ div.FixedHeader_Cloned table {
 	margin: 0 !important
 }
 
+div.dataTables_wrapper td.dataTables_empty {
+	text-align: center;
+}
