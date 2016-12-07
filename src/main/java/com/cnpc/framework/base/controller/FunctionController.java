@@ -88,4 +88,13 @@ public class FunctionController {
         }
     }
 
+
+    //TODO 功能集合将从session中获取
+    @RequestMapping(value="/navigation")
+    @ResponseBody
+    public List<Function> navigation(String pageUrl){
+        return  functionService.getAll();
+    }
+
+
 }

@@ -110,7 +110,7 @@ public abstract class BaseEntity implements Serializable {
     }
 
     public void setDeleted(Integer deleted) {
-
+        deleted=deleted==null?0:deleted;
         this.deleted = deleted;
     }
 

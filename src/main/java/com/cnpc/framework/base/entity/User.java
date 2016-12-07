@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,9 +19,6 @@ public class User extends BaseEntity {
 
     private static final long serialVersionUID = 6093546087036436583L;
 
-    @Header(name = "头像")
-    @Column(name = "avatar")
-    private String avatar;
 
     @Header(name = "姓名")
     @Column(name = "name")
@@ -71,14 +69,16 @@ public class User extends BaseEntity {
     @Column(name = "isSuperAdmin")
     private String isSuperAdmin;
 
-    public String getAvatar() {
 
-        return avatar;
+    @Transient
+    private String avatarId;
+
+    public String getAvatarId() {
+        return avatarId;
     }
 
-    public void setAvatar(String avatar) {
-
-        this.avatar = avatar;
+    public void setAvatarId(String avatarId) {
+        this.avatarId = avatarId;
     }
 
     public String getName() {

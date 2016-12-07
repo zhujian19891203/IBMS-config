@@ -31,7 +31,7 @@ public class BaseTest extends AbstractTestNGSpringContextTests {
 
         int size = csvPojo.getRows().size();
         Object[][] result = new Object[size][];
-        for (int i = 0; i < csvPojo.getRows().size(); i++) {
+        for (int i = 0; i < size; i++) {
             CsvRow row = csvPojo.getRows().get(i);
             List<String> objList = row.getCols();
             int obj_len = objList.size();

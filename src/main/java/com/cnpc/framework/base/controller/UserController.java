@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.cnpc.framework.base.entity.UserAvatar;
+import com.cnpc.framework.utils.StrUtil;
 import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,10 +63,15 @@ public class UserController {
     @VerifyCSRFToken
     @RequestMapping(method = RequestMethod.POST, value = "/save")
     @ResponseBody
-    private Result saveUser(User user) {
-
-        user.setUpdateDateTime(new Date());
-        userService.saveOrUpdate(user);
+    private Result saveUser(User user,HttpServletRequest request) {
+        if (StrUtil.isEmpty(user.getId())) {
+            String userId=userService.save(user).toString();
+            //头像和用户管理
+            userService.updateUserAvatar(user,request.getRealPath("/"));
+        } else {
+            user.setUpdateDateTime(new Date());
+            userService.update(user);
+        }
         return new Result(true);
     }
 
@@ -73,7 +80,11 @@ public class UserController {
     private Result deleteUser(@PathVariable("id") String id) {
 
         User user = userService.get(User.class, id);
-        userService.delete(user);
+        try {
+            userService.delete(user);
+        } catch (Exception e) {
+            return new Result(false);
+        }
         return new Result(true);
     }
 
@@ -107,5 +118,45 @@ public class UserController {
 
         return "base/user/user_tab_list";
     }
+
+
+    /**
+     * 新的页面打开 curd demo
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/page/list")
+    private String pagelist(String id, HttpServletRequest request) {
+        request.setAttribute("selectId", id);
+        return "base/user/user_page_list";
+    }
+
+    /**
+     * 用户编辑 new page
+     *
+     * @return
+     */
+    @RefreshCSRFToken
+    @RequestMapping(method = RequestMethod.GET, value = "/page/edit")
+    private String pageEdit(String id, HttpServletRequest request) {
+
+        request.setAttribute("id", id);
+        return "base/user/user_page_edit";
+    }
+
+    /**
+     * 用户头像上传 avatar
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/avatar")
+    private String avatar(String userId, HttpServletRequest request) {
+        request.setAttribute("userId", userId);
+        return "base/user/user_avatar";
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/getAvatar")
+    @ResponseBody
+    private UserAvatar getAvatar(String userId) {
+        return userService.getAvatarByUserId(userId);
+    }
+
 
 }
