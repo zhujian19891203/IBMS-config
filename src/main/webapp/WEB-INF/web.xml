@@ -54,7 +54,7 @@
     <!-- 统一过滤器 -->
 	<filter>
 		<filter-name>SystemFilter</filter-name>
-		<filter-class>com.cnpc.framework.filter.SystemFilter</filter-class>
+		<filter-class>com.billJiang.framework.filter.SystemFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>SystemFilter</filter-name>
@@ -70,7 +70,7 @@
 	</listener>
 	<!-- 项目启动加载query -->
 	<listener>
-		<listener-class>com.cnpc.framework.listener.QueryListener</listener-class>
+		<listener-class>com.billJiang.framework.listener.QueryListener</listener-class>
 	</listener>
 	<!-- springMVC拦截 -->
 	<servlet>

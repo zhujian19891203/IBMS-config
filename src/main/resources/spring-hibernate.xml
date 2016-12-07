@@ -80,7 +80,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 		<!-- 自动扫描注解方式配置的hibernate类文件 -->
 		<property name="packagesToScan">
 			<list>
-				<value>com.cnpc.**.entity</value>
+				<value>com.billJiang.**.entity</value>
 			</list>
 		</property>
 
@@ -99,7 +99,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<!-- 注解方式配置事务 -->
 	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 		
-	<bean id="SpringContextUtil" class="com.cnpc.framework.utils.SpringContextUtil" scope="singleton"></bean>
+	<bean id="SpringContextUtil" class="com.billJiang.framework.utils.SpringContextUtil" scope="singleton"></bean>
 	
 
 	<!-- 拦截器方式配置事务 -->
@@ -133,7 +133,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	</tx:advice>
 	<!-- 一般只对service层添加事务即可 -->
 	<aop:config expose-proxy="true">
-		<aop:pointcut id="transactionPointcut" expression="execution(* com.cnpc..*Service.*(..))" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.billJiang..*Service.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut"
 					 advice-ref="transactionAdvice" />
 	</aop:config>

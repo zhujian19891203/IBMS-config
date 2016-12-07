@@ -1,8 +1,8 @@
 package com.test.demo;
 
-import com.cnpc.framework.base.entity.User;
-import com.cnpc.framework.base.service.UserService;
-import com.cnpc.framework.testng.BaseTest;
+import com.billJiang.framework.base.entity.User;
+import com.billJiang.framework.base.service.UserService;
+import com.billJiang.framework.testng.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

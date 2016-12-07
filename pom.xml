@@ -3,10 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.cnpc</groupId>
 	<artifactId>AdminEAP</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>AdminEAP</name>
 	<description>Enterprise Application Platform by AdminLTE </description>
-	<repositories>
+<!-- 	<repositories> 
 		<repository>
 			<id>nexus</id>
 			<name>Nexus</name>
@@ -16,9 +17,9 @@
 			</releases>
 			<snapshots>
 				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+			</snapshots> 
+		</repository> 
+	</repositories> -->
 	<properties> 
 		<spring-version>4.0.8.RELEASE</spring-version>
 		<hibernate-version>4.3.6.Final</hibernate-version>
@@ -297,6 +298,20 @@
 					<webAppConfig>
 						<contextPath>/AdminEAP</contextPath>
 					</webAppConfig>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<!-- 注意此处的url -->
+					<!--  <url>http://localhost:18080/manager/text</url> --><!--部署到本地tomcat7-->
+					<url>http://60.205.150.188:80/manager/text</url>
+					<!--<server>tomcat7</server>--> <!-- 此处的名字必须和setting.xml中配置的ID一致 -->
+					<path>/AdminEAP</path>  <!-- 此处的名字是项目发布的工程名 -->
+					<username>tomcat</username><!--settings.xml文件已配置，此处可不配-->
+					<password>tomcat_admineap</password><!--settings.xml文件已配置，此处可不配-->
 				</configuration>
 			</plugin>
 		</plugins>

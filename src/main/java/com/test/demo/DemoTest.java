@@ -1,6 +1,6 @@
 package com.test.demo;
 
-import com.cnpc.framework.testng.BaseTest;
+import com.billJiang.framework.testng.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
