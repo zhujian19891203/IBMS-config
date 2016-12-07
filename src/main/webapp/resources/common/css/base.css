@@ -1,0 +1,46 @@
+.table-border {
+    border: 1px solid #f9f9f9;
+    border-collapse:separate;
+}
+
+.table-border thead{
+    background-color:#f9f9f9;
+}
+
+.avatar-container{
+    border-radius: 6px;
+    width:168px;
+    height:168px;
+    margin:0 auto;
+}
+
+.avatar-img{
+    margin:2px;
+    width:160px;
+    height:160px;
+    text-align:center;
+    align:center;
+    border-radius: 79px;
+    border:1px solid gray;
+}
+
+/*.avatar-img:hover{
+    margin:2px;
+    width:160px;
+    height:160px;
+    text-align:center;
+    align:center;
+    border-radius: 0px;
+    border:1px solid gray;
+}*/
+
+.btn-camera{
+    border:1px solid gray;
+    background-color:#fff;
+    color:gray;
+}
+
+.btn-camera:hover{
+    background-color:gray;
+    color:#fff;
+}

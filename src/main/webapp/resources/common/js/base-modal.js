@@ -90,7 +90,7 @@
                 // <button type="button" class="btn btn-default"
 				// data-dismiss="modal">Close</button>
                 var btn_close = document.createElement('BUTTON');
-                btn_close.className = 'btn btn-default';
+                btn_close.className = 'btn btn-default btn-sm';
                 btn_close.type = 'button';
                 btn_close.setAttribute('data-dismiss', 'modal');
                 btn_close.innerHTML = config.cancel_label;
@@ -104,7 +104,7 @@
             if (ok) {
                 // <button type="button" class="btn btn-primary">Save</button>
                 var btn_ok = document.createElement('BUTTON');
-                btn_ok.className = 'btn btn-primary';
+                btn_ok.className = 'btn btn-primary btn-sm';
                 btn_ok.type = 'button';
                 //btn_ok.setAttribute('data-dismiss', 'modal');
                 btn_ok.innerHTML = config.ok_label;
@@ -226,7 +226,7 @@
     	this.showWin(config.winId||_win_config.winId); 
     	//attach show event
     	 $("#"+winId).on('shown.bs.modal',function(){
-    		/*if(config.top=="auto"){  
+    		/*if(config.top=="auto"){
 	    		var height=$(window).height()>$(this).find(".modal-dialog").eq(0).height()?($(window).height()-$(this).find(".modal-dialog").eq(0).height())/2:0;
 				$(this).find(".modal-dialog").eq(0).css("margin-top",height); 
     		}*/

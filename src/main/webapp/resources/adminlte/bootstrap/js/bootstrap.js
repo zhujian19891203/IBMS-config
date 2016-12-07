@@ -1163,7 +1163,7 @@ if (typeof jQuery === 'undefined') {
     //获取可视窗口的高度  
     var clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;  
     //得到dialog的高度  
-    var dialogHeight = $modal_dialog.height();  
+    var dialogHeight = $modal_dialog.height();
     //计算出距离顶部的高度  
     var m_top =clientHeight - dialogHeight<0?0:(clientHeight - dialogHeight)/2;  
     if(dialogHeight>0) 

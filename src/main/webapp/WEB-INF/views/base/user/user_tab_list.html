@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="box-body">
-                                <table id="user_table" class="table table-bordered table-striped table-hover">
+                                <table id="user_table" class="table table-border">
                                 </table>
                             </div>
                             <!-- /.box-body -->
@@ -258,6 +258,8 @@
                                 if(data.success){
                                     //modals.correct("已删除该数据");
                                     userTable.reloadRowData();
+                                }else{
+                                    modals.error("用户数据被引用，不可删除！");
                                 }
                             });
                         })
