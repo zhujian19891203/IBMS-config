@@ -134,7 +134,7 @@ CommonTable.prototype.fnInitComplete = function(oSettings, json) {
 	$("#" + this.tableId + " thead tr th").removeClass("text-left").removeClass("text-right").addClass("text-center");
 	
 	//行单选 	
-	if(oSettings.oInit.singleSelect){
+	if(oSettings.oInit.singleSelect==true){
 	    $('#'+this.tableId+' tbody').on( 'click', 'tr', function () {
 			//HNAZO modify
 	        /*if ( $(this).hasClass('selected') ) {
@@ -152,7 +152,7 @@ CommonTable.prototype.fnInitComplete = function(oSettings, json) {
 				}
 			}
 	     });
-	}else{ 
+	}else if(oSettings.oInit.singleSelect==false){
 		$('#'+this.tableId+' tbody').on( 'click', 'tr', function (){
 			 $(this).toggleClass('selected');
 		})

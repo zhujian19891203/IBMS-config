@@ -598,13 +598,16 @@ var basePath="${basePath}";//给外部js文件传递路径参数
    $(function(){ 
 	   //首页默认加载
 	   //loadPage("${basePath}/homePage"); 
-	   loadPage("${basePath}/user/page/edit")
+	   loadPage("${basePath}/markdown/edit")
 	   $("a[data-url]").click(function(evt){
 		   loadPage($(this).data("url"));
 		   $("ul.treeview-menu li").removeClass("active");
 		   $(this).parent().addClass("active");
 	   });  
    })
+
+
+
   
 </script>
 </body>

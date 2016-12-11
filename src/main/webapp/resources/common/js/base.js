@@ -194,3 +194,22 @@ function getNextCode(prefix,maxCode,length){
 	
 }
 
+/**
+ * 收缩左边栏时，触发markdown编辑的resize
+ */
+$("[data-toggle='offcanvas']").click(function(){
+	if(editor){
+		setTimeout(function(){editor.resize()},500);
+	}
+});
+
+
+//获取布尔值
+/*String.prototype.BoolValue=function(){
+	if(this==undefined)
+		return false;
+	if(this=="false"||this=="0")
+		return false;
+	return true;
+}*/
+
