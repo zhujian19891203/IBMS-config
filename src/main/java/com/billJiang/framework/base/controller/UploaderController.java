@@ -3,23 +3,30 @@ package com.billJiang.framework.base.controller;
 
 import com.billJiang.framework.base.entity.User;
 import com.billJiang.framework.base.pojo.AvatarResult;
+import com.billJiang.framework.base.pojo.Result;
 import com.billJiang.framework.base.service.UploaderService;
+import com.billJiang.framework.utils.DateUtil;
+import com.billJiang.framework.utils.FileUtil;
 import com.billJiang.framework.utils.PropertiesUtil;
+import com.billJiang.tool.markdown.pojo.MarkDownResult;
 import org.apache.commons.fileupload.util.Streams;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.*;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/file")
@@ -59,6 +66,10 @@ public class UploaderController {
             BufferedInputStream inputStream;
             BufferedOutputStream outputStream;
             for (Iterator<Map.Entry<String, MultipartFile>> it = fileMap.entrySet().iterator(); it.hasNext(); avatarNumber++) {
+                File filePath = new File(dirPath + relPath);
+                if (!filePath.exists()) {
+                    filePath.mkdirs();
+                }
                 Map.Entry<String, MultipartFile> entry = it.next();
                 MultipartFile mFile = entry.getValue();
                 String fieldName = entry.getKey();
@@ -108,6 +119,40 @@ public class UploaderController {
             return result;
         }
         return null;
+    }
+
+    /**
+     * markdown组件上传图片
+     */
+    @RequestMapping(value = "/markdownUpload", method = RequestMethod.POST)
+    @ResponseBody
+    public MarkDownResult markdownUpload(HttpServletRequest request, HttpServletResponse response, @RequestParam(value = "editormd-image-file", required = false) MultipartFile attach) {
+        try {
+            String relPath = PropertiesUtil.getValue("markdownPath");
+            String dirPath = request.getRealPath("/");
+            //不存在目录 则创建
+            File filePath = new File(dirPath + relPath);
+            if (!filePath.exists()) {
+                filePath.mkdirs();
+            }
+            File realFile = new File(dirPath + relPath + File.separator + attach.getOriginalFilename());
+            //上传的文件已存在 则对新上传的文件重命名
+            if (realFile.exists()) {
+                String fileName = DateUtil.format(new Date(), "yyyyMMddHHmmss") + "_" + attach.getOriginalFilename();
+                realFile = new File(dirPath+relPath+File.separator+fileName);
+            }
+            boolean iscreate = FileUtil.copyInputStreamToFile(attach.getInputStream(), realFile);
+            if (iscreate) {
+                String url=relPath + File.separator + realFile.getName();
+                url=request.getAttribute("basePath").toString()+url.replaceAll("\\\\","/");
+                return new MarkDownResult(1, "上传成功", url);
+            }
+            else {
+                return new MarkDownResult(0, "上传失败", null);
+            }
+        } catch (IOException ex) {
+            return new MarkDownResult(0, "上传失败:原因" + ex.getMessage().toString(), null);
+        }
     }
 
 

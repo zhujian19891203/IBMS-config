@@ -35,6 +35,7 @@ public class DateUtil {
 
     private static final int DAY_MILLISECOND = 86400000;
 
+
     /**
      * 日期格式化－将<code>Date</code>类型的日期格式化为<code>String</code>型
      *
@@ -352,6 +353,7 @@ public class DateUtil {
     public static void main(String[] args) {
         try {
             System.out.println(new DateUtil().parseToDate("2012-10-11 22:22"));
+            System.out.println(format(new Date(),"yyyyMMddHHmmss"));
         } catch (Exception e) {
             e.printStackTrace();
         }
