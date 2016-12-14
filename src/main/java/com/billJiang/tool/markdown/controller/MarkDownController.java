@@ -75,5 +75,11 @@ public class MarkDownController {
         return baseService.get(MarkDown.class,id);
     }
 
+    @RequestMapping(value="/preview",method = RequestMethod.GET)
+    public String preview(String id,HttpServletRequest request){
+        request.setAttribute("id",id);
+        return "tool/markdown/markdown_preview";
+    }
+
 
 }

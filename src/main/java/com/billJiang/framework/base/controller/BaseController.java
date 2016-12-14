@@ -27,16 +27,12 @@ public class BaseController {
 
     /**
      * 唯一性校验
-     * 
-     * @param className
-     *            类名
-     * @param fieldName
-     *            属性名
-     * @param fieldValue
-     *            属性值
-     * @param idValue
-     *            当前对象id
-     * @return true 校验通过
+     *
+     * @param className  类名
+     * @param fieldName  属性名
+     * @param fieldValue 属性值
+     * @param id         当前对象id
+     * @return Map 校验通过
      */
     @RequestMapping("/checkUnique")
     @ResponseBody
@@ -71,11 +67,9 @@ public class BaseController {
 
     /**
      * 通用删除记录
-     * 
-     * @param className
-     *            类名
-     * @param id
-     *            主键id
+     *
+     * @param className 类名
+     * @param id        主键id
      * @return
      */
     @RequestMapping(value = "delete")

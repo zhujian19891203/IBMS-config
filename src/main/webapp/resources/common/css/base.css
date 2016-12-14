@@ -14,25 +14,18 @@
     margin:0 auto;
 }
 
+
+
 .avatar-img{
     margin:2px;
     width:160px;
     height:160px;
     text-align:center;
     align:center;
-    border-radius: 79px;
-    border:1px solid gray;
+    border-radius: 50%;
+    padding:3px;
+    border:3px solid #d2d6de;
 }
-
-/*.avatar-img:hover{
-    margin:2px;
-    width:160px;
-    height:160px;
-    text-align:center;
-    align:center;
-    border-radius: 0px;
-    border:1px solid gray;
-}*/
 
 .btn-camera{
     border:1px solid gray;
@@ -44,3 +37,14 @@
     background-color:gray;
     color:#fff;
 }
+
+.navbar-fixed-middle {
+    position: fixed;
+    z-index: 1031;
+    bottom:30px;
+    right: 15px;
+    margin-bottom: 0;
+    border-width: 1px 0 0;
+}
+
+
