@@ -305,13 +305,10 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<!-- 注意此处的url -->
-					<!--  <url>http://localhost:18080/manager/text</url> --><!--部署到本地tomcat7-->
-					<url>http://60.205.150.188:80/manager/text</url>
-					<!--<server>tomcat7</server>--> <!-- 此处的名字必须和setting.xml中配置的ID一致 -->
+					<url>http://localhost:18080/manager/text</url><!--部署到本地tomcat7-->
 					<path>/AdminEAP</path>  <!-- 此处的名字是项目发布的工程名 -->
-					<username>tomcat</username><!--settings.xml文件已配置，此处可不配-->
-					<password>tomcat_admineap</password><!--settings.xml文件已配置，此处可不配-->
+					<username>username</username><!--settings.xml文件已配置，此处可不配-->
+					<password>password</password>
 				</configuration>
 			</plugin>
 		</plugins>
