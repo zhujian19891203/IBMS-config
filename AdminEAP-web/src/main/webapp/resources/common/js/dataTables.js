@@ -7,7 +7,7 @@
  *            query查询id
  * @param searchDiv
  *            查询条件div的id
- * @author bill1012 qq:475572229
+ * @author billjiang qq:475572229
  */
 function CommonTable(tableId, queryId, searchDiv,config) {
 	this.tableId = tableId;

@@ -20,6 +20,17 @@ public class SimpleMail extends BaseEntity {
     @Column(name = "mail_type")
     private String mailType;
 
+    @Column(name="fromUser")
+    private String fromUser;
+
+    public String getFromUser() {
+        return fromUser;
+    }
+
+    public void setFromUser(String fromUser) {
+        this.fromUser = fromUser;
+    }
+
     public String getSubject() {
         return subject;
     }

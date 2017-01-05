@@ -3,8 +3,11 @@ package com.cnpc.framework.base.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_role_function")
@@ -21,6 +24,28 @@ public class RoleFunction extends BaseEntity {
 
     @Column(name = "functionId", length = 36)
     private String functionId;
+
+    @Column(name="remark")
+    private String remark;
+
+    @Transient
+    private List<FunctionFilter> fflist;
+
+    public List<FunctionFilter> getFflist() {
+        return fflist;
+    }
+
+    public void setFflist(List<FunctionFilter> fflist) {
+        this.fflist = fflist;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public String getFunctionId() {
 

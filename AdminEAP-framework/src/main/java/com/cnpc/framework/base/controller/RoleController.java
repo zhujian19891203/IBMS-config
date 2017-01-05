@@ -23,7 +23,7 @@ public class RoleController {
     private RoleService roleService;
 
     /**
-     * 用户列表
+     * 角色列表
      */
     @RequestMapping(method = RequestMethod.GET, value = "/list")
     private String list() {
@@ -32,7 +32,7 @@ public class RoleController {
     }
 
     /**
-     * 用户编辑
+     * 角色编辑
      *
      * @return
      */

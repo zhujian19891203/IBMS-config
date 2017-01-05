@@ -24,7 +24,7 @@ public class UserRoleController {
     private UserRoleService userRoleService;
 
     /**
-     * 用户编辑
+     * 用户选择
      * 
      * @return
      */

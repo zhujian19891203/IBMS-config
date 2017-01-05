@@ -35,7 +35,7 @@ public class MessageController {
         messageService.save(mail);
         SimpleMailSender mailSender = new SimpleMailSender();
         try {
-            mailSender.send(PropertiesUtil.getValue("mail.to"), mail.getMailType()+"->"+mail.getSubject(), mail.getContent());
+            mailSender.send(PropertiesUtil.getValue("mail.to"), mail.getMailType()+"->"+mail.getSubject(), mail.getContent()+"<br/>来自："+mail.getFromUser());
             return new Result(true);
         } catch (Exception ex) {
             return new Result(false, "保存失败，失败原因：" + ex.getMessage().toString());
