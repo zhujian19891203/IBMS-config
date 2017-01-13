@@ -18,3 +18,4 @@ AdminEAP-framework/target/*
 AdminEAP-web/target/*
 .gitignore.bak
 pom.xml
+AdminEAP-web/pom.xml
