@@ -1,9 +1,6 @@
 package com.cnpc.framework.base.service.impl;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.stereotype.Service;
 
@@ -57,5 +54,10 @@ public class FunctionServiceImpl extends BaseServiceImpl implements FunctionServ
 
         String hql = "from Function where (deleted=0 or deleted is null) order by levelCode";
         return this.find(hql);
+    }
+
+    @Override
+    public Set<String> getFunctionCodeSet(Set<String> roleCodes) {
+        return null;
     }
 }

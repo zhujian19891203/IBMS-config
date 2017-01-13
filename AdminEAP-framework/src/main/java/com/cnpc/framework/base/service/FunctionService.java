@@ -1,6 +1,7 @@
 package com.cnpc.framework.base.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.cnpc.framework.base.entity.Function;
 import com.cnpc.framework.base.pojo.TreeNode;
@@ -11,4 +12,5 @@ public interface FunctionService extends BaseService {
 
     List<Function> getAll();
 
+    Set<String> getFunctionCodeSet(Set<String> roleCodes);
 }
