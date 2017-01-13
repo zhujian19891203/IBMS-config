@@ -204,12 +204,3 @@ $("[data-toggle='offcanvas']").click(function(){
 });
 
 
-//获取布尔值
-/*String.prototype.BoolValue=function(){
-	if(this==undefined)
-		return false;
-	if(this=="false"||this=="0")
-		return false;
-	return true;
-}*/
-
