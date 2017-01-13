@@ -312,7 +312,7 @@
                         <url>http://60.205.150.188:80/manager/text</url><!--部署到本地tomcat7-->
                         <path>/${project.name}</path>  <!-- 此处的名字是项目发布的工程名 -->
                         <username>tomcat</username><!--settings.xml文件已配置，此处可不配-->
-                        <password>tomcat_jrn1012</password><!--settings.xml文件已配置，此处可不配-->
+                        <password>tomcat_billjiang</password><!--settings.xml文件已配置，此处可不配-->
                     </configuration>
                 </plugin>
             </plugins>
