@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="AdminLTE,AdminEAP,AdminLTE框架">
+    <meta name="description" content="基于AdminLTE的快速开发框架,让web开发更简单">
     <title>AdminEAP | 登录</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -16,7 +18,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/AdminLTE.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/square/red.css">
     <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -57,7 +59,7 @@
                     <div class="checkbox pull-right">
                         <a href="#">忘记密码</a>
                         <span>&nbsp;/&nbsp;</span>
-                        <a href="register.html" class="text-center">注册</a>
+                        <a href="${basePath}/register" class="text-center">注册</a>
                     </div>
                 </div>
                 <!-- /.col -->
@@ -69,17 +71,21 @@
             </div>
         </form>
 
+
         <div class="social-auth-links" style="margin-bottom: 0px;">
             <div class="row">
-                <div class="col-xs-4">
-                    <div class="text-left" style="margin-top: 5px;">其他方式登录</div>
+                <div class="col-xs-5">
+                    <div class="text-left" style="margin-top: 5px;">快速登录</div>
                 </div>
-                <div class="col-xs-8">
+                <div class="col-xs-7">
                     <div class="text-right">
-                        <a class="btn btn-social-icon btn-primary"><i class="fa fa-qq"></i></a>
+                        <!--<a class="btn btn-social-icon btn-primary"><i class="fa fa-qq"></i></a>
                         <a class="btn btn-social-icon btn-success"><i class="fa fa-wechat"></i></a>
                         <a class="btn btn-social-icon btn-warning"><i class="fa fa-weibo"></i></a>
-                        <a class="btn btn-social-icon btn-info"><i class="fa fa-github"></i></a>
+                        <a class="btn btn-social-icon btn-info"><i class="fa fa-github"></i></a>-->
+                        <#list oAuthServices as oauth>
+                            <a class="btn btn-social-icon ${oauth.btnClass}" href="${oauth.authorizationUrl}"><i class="fa fa-${oauth.oAuthType}"></i></a>
+                        </#list>
                     </div>
                 </div>
             </div>
@@ -102,8 +108,8 @@
     <script>
         $(function () {
             $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
+                checkboxClass: 'icheckbox_square-red',
+                radioClass: 'iradio_square-red',
                 increaseArea: '20%' // optional
             });
 
@@ -138,9 +144,11 @@
                     message:"${message.message?default('')}",
                     userName:'userName',
                     password:'password'
-                })
+                });
             </#if>
         });
+
+
 
         //使用本地缓存记住用户名密码
         function rememberMe(rm_flag){

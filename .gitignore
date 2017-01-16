@@ -19,3 +19,5 @@ AdminEAP-web/target/*
 .gitignore.bak
 pom.xml
 AdminEAP-web/pom.xml
+pom.xml
+pom.xml

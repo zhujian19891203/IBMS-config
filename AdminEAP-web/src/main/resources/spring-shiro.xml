@@ -42,6 +42,8 @@
 				<!--/=anon-->
 				/login=anon
 				/logout=anon
+				/register=anon
+				/oauth/**=anon
 				/resources/**=anon
 				/**=authc
 				<!--/=anon-->

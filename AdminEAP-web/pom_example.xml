@@ -173,6 +173,10 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
         </dependency>
+        <!--<dependency>
+            <groupId>org.scribe</groupId>
+            <artifactId>scribe</artifactId>
+        </dependency>-->
     </dependencies>
 
     <build>
@@ -217,10 +221,10 @@
                 <version>2.2</version>
                 <configuration>
                     <!-- 注意此处的url -->
-                    <url>http://xx.xxx.xxx.xxx:xxx/manager/text</url><!--部署到本地tomcat7-->
+                    <url>http://xxxxxx/manager/text</url><!--部署到本地tomcat7-->
                     <path>/${project.name}</path>  <!-- 此处的名字是项目发布的工程名 -->
-                    <username>username</username><!--settings.xml文件已配置，此处可不配-->
-                    <password>password</password><!--settings.xml文件已配置，此处可不配-->
+                    <username>tomcat</username><!--settings.xml文件已配置，此处可不配-->
+                    <password>tomcat_test</password><!--settings.xml文件已配置，此处可不配-->
                 </configuration>
             </plugin>
         </plugins>
