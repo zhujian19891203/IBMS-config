@@ -2,8 +2,10 @@ package com.cnpc.tool.markdown.controller;
 
 import com.cnpc.framework.base.pojo.Result;
 import com.cnpc.framework.base.service.BaseService;
+import com.cnpc.framework.util.SecurityUtil;
 import com.cnpc.framework.utils.StrUtil;
 import com.cnpc.tool.markdown.entity.MarkDown;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,59 +29,67 @@ public class MarkDownController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(String id, HttpServletRequest request) {
-        request.setAttribute("id",id);
+        request.setAttribute("id", id);
         return "tool/markdown/markdown_edit";
     }
 
-    @RequestMapping(value="/list",method = RequestMethod.GET)
-    public String list(){
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list() {
         return "tool/markdown/markdown_list";
     }
 
     //保存
-    @RequestMapping(value="/save",method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public Result save(MarkDown obj){
+    public Result save(MarkDown obj) {
         //TODO set the real user id
-        obj.setUserId(null);
-        if(StrUtil.isEmpty(obj.getId())){
+        obj.setUserId(SecurityUtil.getUserId());
+        if (StrUtil.isEmpty(obj.getId())) {
             obj.setCreateDateTime(new Date());
             obj.setDeleted(0);
             baseService.save(obj);
-        }else{
-            MarkDown md=baseService.get(MarkDown.class,obj.getId());
+        } else {
+            MarkDown md = baseService.get(MarkDown.class, obj.getId());
             md.setUpdateDateTime(new Date());
             md.setTitle(obj.getTitle());
             md.setKeywords(obj.getKeywords());
             md.setContent(obj.getContent());
+            md.setUserId(obj.getUserId());
             baseService.update(md);
         }
         return new Result();
     }
 
-    @RequestMapping(value="/delete/{id}",method=RequestMethod.POST)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public Result delete(@PathVariable("id") String id){
-        try{
-            MarkDown markDown=baseService.get(MarkDown.class,id);
+    public Result delete(@PathVariable("id") String id) {
+        try {
+            MarkDown markDown = baseService.get(MarkDown.class, id);
             baseService.delete(markDown);
             return new Result();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             return new Result(false);
         }
     }
 
-    @RequestMapping(value="/get/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public MarkDown get(@PathVariable("id") String id){
-        return baseService.get(MarkDown.class,id);
+    public MarkDown get(@PathVariable("id") String id) {
+        return baseService.get(MarkDown.class, id);
     }
 
-    @RequestMapping(value="/preview",method = RequestMethod.GET)
-    public String preview(String id,HttpServletRequest request){
-        request.setAttribute("id",id);
+    @RequestMapping(value = "/preview", method = RequestMethod.GET)
+    public String preview(String id, HttpServletRequest request) {
+        request.setAttribute("id", id);
         return "tool/markdown/markdown_preview";
     }
 
+    //使用说明
+    @RequestMapping(value = "/preview/{code}", method = RequestMethod.GET)
+    public String previewByCode(@PathVariable("code") String code,HttpServletRequest request) {
+        MarkDown markDown=baseService.get("from MarkDown where code='"+code+"'");
+        request.setAttribute("id", markDown.getId());
+        return "tool/markdown/markdown_preview";
+    }
 
 }

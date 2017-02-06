@@ -546,20 +546,10 @@
 				windowWidth = $window.width(),
 				windowHeight = $window.height(),
 				scrollTop = $window.scrollTop();
-            //fix the problem of 360 browser datepicker on the bottom layer
-			var zindex_len=this.element.parents().filter(function(){
+
+			var zIndex = parseInt(this.element.parents().filter(function(){
 					return $(this).css('z-index') !== 'auto';
-				}).length;
-			var zIndex = 10;
-			if(zindex_len==1)
-				zIndex=parseInt(this.element.parents().filter(function(){
-						return $(this).css('z-index') !== 'auto';
-					}).first().css('z-index'))+10;
-			else if(zindex_len>1){
-				zIndex=parseInt(this.element.parents().filter(function(){
-						return $(this).css('z-index') !== 'auto'&&$(this).css('z-index')>0;
-					}).first().css('z-index'))+10;
-			}
+				}).first().css('z-index'))+10;
 			var offset = this.component ? this.component.parent().offset() : this.element.offset();
 			var height = this.component ? this.component.outerHeight(true) : this.element.outerHeight(false);
 			var width = this.component ? this.component.outerWidth(true) : this.element.outerWidth(false);

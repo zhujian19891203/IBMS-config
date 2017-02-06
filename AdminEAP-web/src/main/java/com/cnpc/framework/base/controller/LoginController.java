@@ -141,6 +141,7 @@ public class LoginController {
         return REGISTER_PAGE;
     }
 
+
     //----------------oauth 认证------------------
     @RequestMapping(value = "/oauth/{type}/callback", method = RequestMethod.GET)
     public String callback(@RequestParam(value = "code", required = true) String code, @PathVariable(value = "type") String type,

@@ -9,7 +9,8 @@ public final class JXLExcelUtil {
 	 * 合并单元格（行合并），合并规则：内容相同则合并
 	 * 
 	 * @param sheet	       合并的sheet
-	 * @param colIndex      合并列索引
+	 * @param colindex      合并列索引
+	 *                      @param contentBeginIndex 正文开始行
 	 * @return
 	 */
 	@SuppressWarnings("deprecation")

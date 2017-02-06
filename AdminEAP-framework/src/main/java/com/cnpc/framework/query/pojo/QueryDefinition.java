@@ -28,6 +28,10 @@ public class QueryDefinition {
 
     private QueryDefinition() {
 
+
+    }
+
+    public void initQuery(){
         cachedFilesCount = 0;
         Resource resources[] = ConfigurationUtil.getAllResources(DEFAULT_CONFIG_LOCATION);
         if (resources != null) {

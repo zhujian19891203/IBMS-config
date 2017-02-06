@@ -42,6 +42,10 @@
         // <div class="modal-dialog" role="document">
         var dialog = document.createElement('DIV');
         dialog.className = 'modal-dialog modal-'+(config.large?'lg':'sm');
+
+        //update for HANZO, 2016/12/28
+        if (config.width) { dialog.style.width = config.width+'px'; }
+
         dialog.role = 'document';
         modal.appendChild(dialog);
 
@@ -78,10 +82,26 @@
         // <div class="modal-body">
         var body = document.createElement('DIV');
         body.className = 'modal-body';
-        body.innerHTML = config.text||'';
+
+        //update for HANZO, 2016/12/28
+        if (config.src) {
+            body.style.height = config.height+'px';
+
+            var frame = document.createElement('iframe');
+            frame.style.margin = 0;
+            frame.style.padding = 0;
+            frame.style.width = '100%';
+            frame.style.height = '100%';
+            frame.style.border = 'none';
+            frame.src = config.src;
+            body.appendChild(frame);
+        } else {
+            body.innerHTML = config.text||'';
+        }
+
         content.appendChild(body);
 
-        if (ok || cancel) {
+        if (ok || cancel || config.has_footer) {
             // <div class="modal-footer">
             var footer = document.createElement('DIV');
             footer.className = 'modal-footer';
@@ -132,10 +152,10 @@
         $('#modal-tips-div').modal('show');
 
         $('#modal-tips-div').on("hidden.bs.modal", function() {
-    	   _remove_modal(); 
-	   	   $(this).removeData("bs.modal"); 
+    	   _remove_modal();
+	   	   $(this).removeData("bs.modal");
 	   	});
-        
+
  
         return modal;
     }
@@ -202,7 +222,10 @@
 
         return _create_modal(cfg, true, true);
     };
-    
+
+    modals.popup = function(cfg) {
+        return _create_modal(cfg||{}, false, false);
+    };
     
     
     /****************************************************************************

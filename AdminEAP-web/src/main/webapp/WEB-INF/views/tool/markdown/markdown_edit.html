@@ -55,6 +55,7 @@
                                 <input type="checkbox" name="autoHeight" data-flag="icheck" class="flat-red"
                                        id="autoHeight"> 自适应高度
                             </label>
+                            <input type="hidden" name="code" id="code">
                         </div>
                         <div class="col-sm-6 text-right">
                             <div class="btn-group ">
@@ -146,6 +147,7 @@
                 }else{
                     fillLocalStorage(result);
                 }
+                $("#code").val(result.code);
             })
         }
 

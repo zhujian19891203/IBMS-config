@@ -61,7 +61,7 @@
                 <div class="col-xs-12">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox" name="rememberMe"> 同意遵循<a href="#">AdminEAP协议</a>
+                            <input type="checkbox" name="rememberMe" required> 同意遵循<a href="#">AdminEAP协议</a>
                         </label>
                     </div>
                 </div>
@@ -148,10 +148,6 @@
                             min: 6,
                             max: 30,
                             message: '密码长度必须在6到30之间'
-                        },
-                        identical: {//相同
-                            field: 'repassword', //需要进行比较的input name值
-                            message: '两次密码不一致'
                         },
                         different: {//不能和用户名相同
                             field: 'loginName',//需要进行比较的input name值

@@ -31,7 +31,13 @@ function loadPage(url){
 /**
  * Load a url into a page
  */
+var _old_load = jQuery.fn.load;
 jQuery.fn.load = function( url, params, callback ) {
+	//update for HANZO, 2016/12/22
+	if (typeof url !== "string" && _old_load) {
+		return _old_load.apply( this, arguments );
+	}
+
 	var selector, type, response,
 		self = this,
 		off = url.indexOf( " " );
@@ -114,6 +120,16 @@ function ajaxPost(url, params, callback) {
 	return result;
 }
 
+function getServerTime(base_path, format) {
+	var result = null;
+
+	var sdate = new Date(ajaxPost(base_path+'/base/getServerTime'));
+	if (sdate != 'Invalid Date') {
+		result = formatDate(sdate, format||'yyyy/MM/dd');
+	}
+
+	return result;
+}
 
 /**
  * 格式化日期
@@ -203,4 +219,13 @@ $("[data-toggle='offcanvas']").click(function(){
 	}
 });
 
+
+//获取布尔值
+/*String.prototype.BoolValue=function(){
+	if(this==undefined)
+		return false;
+	if(this=="false"||this=="0")
+		return false;
+	return true;
+}*/
 

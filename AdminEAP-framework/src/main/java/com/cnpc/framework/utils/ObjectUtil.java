@@ -13,11 +13,9 @@ public class ObjectUtil {
 
     /**
      * 根据属性名获取getter setter方法名
-     * 
-     * @param field
-     *            字段名
-     * @param prefix
-     *            前缀
+     *
+     * @param field  字段名
+     * @param prefix 前缀
      * @return
      */
     public static String methodName(String field, String prefix) {
@@ -32,11 +30,9 @@ public class ObjectUtil {
 
     /**
      * 根据属性名获取值
-     * 
-     * @param obj
-     *            对象
-     * @param field
-     *            字段名
+     *
+     * @param obj   对象
+     * @param field 字段名
      * @return
      */
     public static Object getValueByKey(Object obj, String field) {
@@ -59,13 +55,10 @@ public class ObjectUtil {
 
     /**
      * 将对象object特定方法的返回值（
-     * 
-     * @param object
-     *            对象
-     * @param method
-     *            方法
-     * @param format
-     *            格式
+     *
+     * @param obj    对象
+     * @param field  方法
+     * @param format 格式
      * @return
      */
     public static String ObjectToString(Object obj, String field, String format) throws Exception {
@@ -143,13 +136,10 @@ public class ObjectUtil {
 
     /**
      * 将对象object特定方法的返回值（主要是get方法）按照format格式转化为字符串类型
-     * 
-     * @param object
-     *            对象
-     * @param method
-     *            方法
-     * @param format
-     *            格式
+     *
+     * @param object 对象
+     * @param method 方法
+     * @param format 格式
      * @return
      */
     public static String ObjectToString(Object object, Method method, String format) throws Exception {
@@ -193,7 +183,7 @@ public class ObjectUtil {
             field.setAccessible(true);
             CriteriaImpl criteriaImpl = (CriteriaImpl) field.get(impl);
             Iterator iterator = criteriaImpl.iterateSubcriteria();
-            for (; iterator.hasNext();) {
+            for (; iterator.hasNext(); ) {
                 Subcriteria subcriteria = (Subcriteria) iterator.next();
                 if (subcriteria.getPath().equals(path)) {
                     return true;

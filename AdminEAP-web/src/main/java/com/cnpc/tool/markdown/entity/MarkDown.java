@@ -34,6 +34,18 @@ public class MarkDown extends BaseEntity {
     @Column(name="user_id")
     private String userId;
 
+    @Header(name="编码")
+    @Column(name="code")
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     public String getUserId() {
         return userId;
     }
