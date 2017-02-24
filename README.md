@@ -14,7 +14,15 @@ AdminEAP官网：[http://www.admineap.com](http://www.admineap.com)
 
 What AdminEAP looks like (can do) ?
 ===========
-!["Bootstrap DataTable"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/homepage.png "User DataTable-user list")
+AdminEAP HomePage:
+
+!["AdminEAP 官网"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/homepage.png "AdminEAP homePage")
+
+- Component 组件集成
+- CURD Demo 增删改查
+- Tool 系统工具 
+- Workflow 工作流 
+- System Security 权限与系统安全
 
 **Bootstrap DataTable**
 
@@ -28,10 +36,6 @@ add a new user
 
 !["Bootstrap DataTable"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/table_new.png "User DataTable-add a User")
 
-upate an exist user
-
-!["Bootstrap DataTable"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/table_edit.png "User DataTable-update a User")
-
 
 **Bootstrap TreeView**
 
@@ -41,13 +45,10 @@ Bootstrap treeview
 
 **Multiple DataTables**
 
-rolelist dataTable with associated  users
+role-list dataTable with associated  users
 
 !["Multiple DataTables"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/role_list.png "role_list")
 
-select or unselect user under a certain role
-
-!["Multiple DataTables"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/role_user.png "role_user")
 
 **Icon Selector**
 
@@ -55,12 +56,31 @@ icon selector
 
 !["Icon Selector"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/icon_selector.png "icon_selector")
 
+AdminEAP has many functions as you wish,
+
 
 Features
 ===========
+- Back-End -- ```Spring MVC```+```Spring```+```Hibernate```+```Maven```
+- Front-End --```FreeMarker```+```AdminLTE```+```Bootstrap validator/treeview/datatable```+```base-modal/base-form```
+- Quartz
+- Shiro
+- Activi
+ 
+ see more functions, please see http://www.admineap.com
+ 
 - 后端架构 -- ```Spring MVC```+```Spring```+```Hibernate```+```Maven```
 - 前端架构 --```FreeMarker```+```AdminLTE(base on Bootstrap)```
 - 快速开发能力 -- 基于```XML```配置的数据列表，支持分页、查询条件、排序等配置
 - 完整的权限系统 -- 基于RBAC+Shiro的权限安全框架
 - 集成多种组件 --集成Quartz、jxls、java mail等第三方开源后端组件，也集成Bootstrap Treeview,Bootstrap Validator前端组件
+
+Donate 捐赠
+==================
+if you support admineap, you can donate to me,thanks。
+如果你想支持AdminEAP框架，您可以通过以下渠道捐赠支持，谢谢。
+!["Donate To billJiang"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/donate.png "donate to billJiang")
+
+
+
 
