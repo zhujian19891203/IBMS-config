@@ -16,7 +16,7 @@
 </div>
 
 <div class="modal-body">
-    <form id="user-form" name="user-form" class="form-horizontal">
+    <form id="mail-form" name="mail-form" class="form-horizontal">
         <input type="hidden" name="id">
         <input type="hidden" name="version">
         <input type="hidden" name="createDateTime" data-flag="date" data-format="yyyy-MM-dd HH:mm:ss">
@@ -63,10 +63,11 @@
     //tableId,queryId,conditionContainer
     var form = null;
     $(function () {
-
+        //初始化控件
+        form = $("#mail-form").form();
         $("#compose-textarea").wysihtml5();
         //数据校验
-        $("#user-form").bootstrapValidator({
+        $("#mail-form").bootstrapValidator({
             message: '请输入有效值',
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
@@ -107,8 +108,7 @@
                 }
             }
         });
-        //初始化控件
-        form = $("#user-form").form();
+        form.initComponent();
 
         $("[data-btn-type='cancel']").click(function () {
             closeMsgWin();
@@ -125,7 +125,7 @@
 
     function resetForm() {
         form.clearForm();
-        $("#user-form").data('bootstrapValidator').resetForm();
+        $("#mail-form").data('bootstrapValidator').resetForm();
     }
 
 

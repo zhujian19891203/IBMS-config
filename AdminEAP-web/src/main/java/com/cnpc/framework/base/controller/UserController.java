@@ -63,11 +63,11 @@ public class UserController {
     @VerifyCSRFToken
     @RequestMapping(method = RequestMethod.POST, value = "/save")
     @ResponseBody
-    private Result saveUser(User user,HttpServletRequest request) {
+    private Result saveUser(User user, HttpServletRequest request) {
         if (StrUtil.isEmpty(user.getId())) {
-            String userId=userService.save(user).toString();
+            String userId = userService.save(user).toString();
             //头像和用户管理
-            userService.updateUserAvatar(user,request.getRealPath("/"));
+            userService.updateUserAvatar(user, request.getRealPath("/"));
         } else {
             user.setUpdateDateTime(new Date());
             userService.update(user);

@@ -247,5 +247,9 @@ public class BaseServiceImpl implements BaseService {
     public <T> List<T> findByCriteria(DetachedCriteria criteria) {
 
         return baseDao.findByCriteria(criteria);
+
+    }
+    public Object getMaxByExample(Object exampleEntity, String maxProperty, String condition, boolean enableLike){
+        return baseDao.getMaxByExample(exampleEntity,maxProperty,condition,enableLike);
     }
 }

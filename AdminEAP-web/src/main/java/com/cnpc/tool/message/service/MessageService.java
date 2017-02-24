@@ -1,7 +1,6 @@
 package com.cnpc.tool.message.service;
 
 import com.cnpc.framework.base.service.BaseService;
-import com.fasterxml.jackson.databind.deser.Deserializers;
 
 /**
  * Created by billJiang on 2016/12/27.

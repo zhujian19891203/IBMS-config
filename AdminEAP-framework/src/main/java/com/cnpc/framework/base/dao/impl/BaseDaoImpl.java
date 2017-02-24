@@ -8,11 +8,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Example;
@@ -24,10 +20,10 @@ import org.springframework.stereotype.Repository;
 
 import com.cnpc.framework.base.dao.BaseDao;
 import com.cnpc.framework.base.pojo.PageInfo;
+import org.springframework.util.Assert;
 
 /**
  * @author bin
- *
  */
 @Repository("baseDao")
 public class BaseDaoImpl implements BaseDao {
@@ -441,5 +437,21 @@ public class BaseDaoImpl implements BaseDao {
             ec.add(Restrictions.sqlRestriction(newCondition));
         }
         return ec.list();
+    }
+
+    public Object getMaxByExample(final Object exampleEntity, final String maxProperty, final String condition, final boolean enableLike) {
+
+        Criteria executableCriteria = this.getCurrentSession().createCriteria(exampleEntity.getClass());
+        executableCriteria.setProjection(Projections.max(maxProperty));
+        if (enableLike) {
+            executableCriteria.add(Example.create(exampleEntity).enableLike());
+        } else {
+            executableCriteria.add(Example.create(exampleEntity));
+        }
+        if (condition != null && !condition.equals("")) {
+            String newCondition = condition.replaceAll("`", "'");
+            executableCriteria.add(Restrictions.sqlRestriction(newCondition));
+        }
+        return executableCriteria.uniqueResult();
     }
 }

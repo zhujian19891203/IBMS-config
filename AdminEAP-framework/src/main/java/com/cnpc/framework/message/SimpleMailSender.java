@@ -9,6 +9,7 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -73,6 +74,7 @@ public class SimpleMailSender {
         message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(recipient));
         // 设置主题
         message.setSubject(subject);
+        message.setSentDate(new Date());
         // 设置邮件内容
         message.setContent(content.toString(), "text/html;charset=utf-8");
         // 发送
@@ -94,6 +96,7 @@ public class SimpleMailSender {
         final MimeMessage message = new MimeMessage(session);
         // 设置发信人
         message.setFrom(new InternetAddress(authenticator.getUsername()));
+        message.setSentDate(new Date());
         // 设置收件人们
         final int num = recipients.size();
         InternetAddress[] addresses = new InternetAddress[num];

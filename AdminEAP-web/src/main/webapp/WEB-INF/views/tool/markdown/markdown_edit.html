@@ -8,7 +8,7 @@
         <small id="title_sm">新增</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="${basePath}"><i class="fa fa-dashboard"></i> 首页</a></li>
         <li><a href="#">系统管理</a></li>
         <li class="active">Markdown编辑器</li>
     </ol>
@@ -34,17 +34,17 @@
                     <div class="row">
                        <div class="form-group col-sm-7">
                         <div class="col-sm-4">
-                            <select id="editormd-theme-select" class="form-control">
+                            <select id="editormd-theme-select" class="form-control select2">
                                 <option selected="selected" value="">工具栏样式</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <select id="editor-area-theme-select" class="form-control">
+                            <select id="editor-area-theme-select" class="form-control select2">
                                 <option selected="selected" value="">编辑区样式</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <select id="preview-area-theme-select" class="form-control">
+                            <select id="preview-area-theme-select" class="form-control select2">
                                 <option selected="selected" value="">预览区样式</option>
                             </select>
                         </div>
@@ -81,6 +81,7 @@
 <script>
     var editor;
 
+    $(".select2").select2();
     function themeSelect(id, themes, lsKey, callback) {
         var select = $("#" + id);
 

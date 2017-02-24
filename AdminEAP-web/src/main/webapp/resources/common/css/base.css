@@ -47,4 +47,12 @@
     border-width: 1px 0 0;
 }
 
-
+/*查询条件 日期*/
+.dataTables_filter .input-group{
+    padding-right: 0px!important;
+    padding-left:0px!important;
+}
+.dataTables_filter .input-group input{
+    margin-left:0px!important;
+    width: 120px!important;
+}

@@ -66,6 +66,12 @@ public class DictController {
         return dict;
     }
 
+    @RequestMapping(value="/getDictsByCode",method = RequestMethod.POST)
+    @ResponseBody
+    public List<Dict> getDictsByCode(String code){
+        return dictService.getDictsByCode(code);
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     public Result save(Dict dict) {

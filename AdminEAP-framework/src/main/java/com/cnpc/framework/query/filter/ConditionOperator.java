@@ -180,7 +180,7 @@ public class ConditionOperator {
                 if(values.get(0)==null){
                     if(values.get(1)!=null)
                     criteria.add(Restrictions.le(key,values.get(1)));
-                }else if(values.get(1)!=null){
+                }else if(values.get(1)==null){
                     criteria.add(Restrictions.ge(key,values.get(0)));
                 }else{
                     criteria.add(Restrictions.between(key,values.get(0),values.get(1)));

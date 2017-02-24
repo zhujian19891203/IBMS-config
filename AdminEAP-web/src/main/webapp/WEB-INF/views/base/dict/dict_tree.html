@@ -2,7 +2,7 @@
 	<section class="content-header">
 		<h1>字典管理</h1>
 		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+			<li><a href="${basePath}"><i class="fa fa-dashboard"></i> 首页</a></li>
 			<li><a href="#">系统管理</a></li>
 			<li class="active">字典管理</li>
 		</ol>
@@ -185,7 +185,8 @@
 						}
 					}
 				});
-				
+
+				form.initComponent();
 				//按钮事件
 				var btntype=null;
 				$('button[data-btn-type]').click(function() {

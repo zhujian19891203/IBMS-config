@@ -117,7 +117,6 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 			<tx:method name="repair" propagation="REQUIRED" />
 			<tx:method name="delAndRepair" propagation="REQUIRED" />
 			<tx:method name="execute*" propagation="REQUIRED" />
-			<tx:method name="*" propagation="REQUIRED" />
 			<tx:method name="submit*" propagation="REQUIRED" />
 			<tx:method name="batch*" propagation="REQUIRED" />
 

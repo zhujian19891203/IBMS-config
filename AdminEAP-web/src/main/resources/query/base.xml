@@ -2,7 +2,7 @@
 <queryContext xmlns="http://www.example.org/query" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.example.org/query query.xsd ">
 	<!-- 用户列表 -->
-	<query id="user_list" key="id" tableName="用戶列表" className="com.cnpc.framework.base.entity.User"
+	<query id="user_list" key="id" tableName="用户列表" className="com.cnpc.framework.base.entity.User"
 		pageSize="10"  widthType="px" order="updateDateTime desc">
 		<column key="rowIndex" header="序号" width="50" allowSort="false"/>
 		<column key="id" header="id" hidden="true"/>

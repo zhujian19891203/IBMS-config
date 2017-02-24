@@ -114,11 +114,22 @@ CommonTable.prototype.initTable = function(tableId, queryId, searchDiv) {
 	if(this.resetButton){
 		this.resetButton.click(function(){
 			//清除查询条件
-			clearForm(that.searchDiv);
+			that.clearSearchDiv(that.searchDiv);
 			//清除排序、分页、重置初始长度
 		    that.table.order([]).page.len(10).draw(); 
 		});
 	}
+}
+
+CommonTable.prototype.clearSearchDiv=function(selector){
+	var sel=$(selector).length>0?$(selector):$("#"+this.searchDiv);
+	sel.find(':input[name]:not(:radio)').val('');
+	sel.find(':radio').attr('checked', false);
+	sel.find(':radio[data-flag]').iCheck('update');
+	sel.find(':checkbox').attr('checked', false);
+	sel.find(':checkbox[data-flag]').iCheck('update');
+	sel.find('select:not(.select2)').val("");
+	sel.find("select.select2").select2().val("").trigger("change");
 }
 
 // 表格初始化后移动查询组件位置 oSettings=配置；json=数据记录；

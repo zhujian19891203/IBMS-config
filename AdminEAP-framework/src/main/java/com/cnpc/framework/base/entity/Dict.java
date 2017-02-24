@@ -7,9 +7,11 @@ import javax.persistence.Transient;
 
 import com.cnpc.framework.annotation.ForeignShow;
 import com.cnpc.framework.annotation.Header;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tbl_dict")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler", "fieldHandler" })
 public class Dict extends BaseEntity {
 
     private static final long serialVersionUID = 5569761987303812150L;

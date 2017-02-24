@@ -22,11 +22,9 @@
 				</div>
 				<div class="form-group">
 					<label for="birthday" class="col-sm-3 control-label">出生日期</label>
-					<div class="input-group date col-sm-8">
-						<div class="input-group-addon">
-							<i class="fa fa-calendar"></i>
-						</div>
-						<input type="text" class="form-control" data-flag="datepicker" data-format="yyyy-MM-dd" id="birthday" name="birthday"
+					<div class="input-group col-sm-8">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input type="text" class="form-control" data-flag="datepicker" data-format="yyyy-MM-dd" name="birthday" id="birthday"
 							placeholder="出生日期">
 					</div>
 				</div>
@@ -94,6 +92,8 @@
 	var form =null;
 	var id="${id?default(0)}";
 	$(function() {
+		//初始化控件
+		form=$("#user-form").form();
 		//数据校验
 		$("#user-form").bootstrapValidator({
 			message : '请输入有效值',
@@ -166,8 +166,7 @@
 				}
 			}
 		});
-		//初始化控件
-		form=$("#user-form").form();
+		form.initComponent();
 		//回填id		
 		if(id!="0"){
 			ajaxPost(basePath+"/user/get",{id:id},function(data){

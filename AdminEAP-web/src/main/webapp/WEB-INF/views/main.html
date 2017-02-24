@@ -17,11 +17,10 @@
   <link rel="stylesheet" href="${basePath}/resources/common/libs/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="${basePath}/resources/common/libs/ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/AdminLTE.min.css">
+
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/skins/_all-skins.css">
+
   <link rel="stylesheet" href="${basePath}/resources/common/css/base.css">
  
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -36,8 +35,13 @@
 	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-validator/dist/css/bootstrap-validator.css"/>
 	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/iCheck/all.css">
 	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/select2/select2.min.css">
 	<!-- treeview -->
 	<link rel="stylesheet" href="${basePath}/resources/adminlte/plugins/bootstrap-treeview/bootstrap-treeview.min.css" />
+  <!-- Theme style -->
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${basePath}/resources/adminlte/dist/css/skins/_all-skins.css">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 <a name="main"></a>
@@ -551,6 +555,8 @@ var basePath="${basePath}";//给外部js文件传递路径参数
 </script>
 <!-- jQuery 2.2.0 -->
 <script src="${basePath}/resources/adminlte/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+<!--JSON2-->
+<script src="${basePath}/resources/common/json/json2.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="${basePath}/resources/adminlte/bootstrap/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -571,10 +577,13 @@ var basePath="${basePath}";//给外部js文件传递路径参数
 		
 <!-- AdminLTE for demo purposes -->
 <script src="${basePath}/resources/adminlte/dist/js/demo.js"></script>
+<!--select2-->
+<script src="${basePath}/resources/adminlte/plugins/select2/select2.full.min.js"></script>
 
 <script type="text/javascript" src="${basePath}/resources/common/js/base.js"></script>
 <script type="text/javascript" src="${basePath}/resources/common/js/base-modal.js"></script>
 <script type="text/javascript" src="${basePath}/resources/common/js/base-form.js"></script>
+<script type="text/javascript" src="${basePath}/resources/common/js/base-datasource.js"></script>
 <!-- 加入页面的的脚本 -->
 <script>
    //加载菜单
@@ -603,7 +612,7 @@ var basePath="${basePath}";//给外部js文件传递路径参数
    $(function(){ 
 	   //首页默认加载
         loadPage("${basePath}/homePage");
-        //loadPage("${basePath}/rolefunc/list");
+        //loadPage("${basePath}/generator/setting");
 	   //loadPage("${basePath}/markdown/preview?id=402880e958ecdff60158ed0c62ba0001")
 	   $("a[data-url]").click(function(evt){
 		   loadPage($(this).data("url"));

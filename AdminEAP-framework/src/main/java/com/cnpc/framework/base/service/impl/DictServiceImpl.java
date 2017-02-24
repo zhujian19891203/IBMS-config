@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cnpc.framework.utils.TreeUtil;
 import org.springframework.stereotype.Service;
 
 import com.cnpc.framework.base.entity.Dict;
@@ -22,13 +23,6 @@ public class DictServiceImpl extends BaseServiceImpl implements DictService {
         String hql = "from Dict order by levelCode asc";
         List<Dict> dicts = this.find(hql);
         Map<String, TreeNode> nodelist = new LinkedHashMap<String, TreeNode>();
-        // root
-        /*
-         * TreeNode root = new TreeNode(); root.setText("字典管理");
-         * root.setHref("0"); root.setParentId("-1");
-         * nodelist.put(root.getHref(), root);
-         */
-        List<TreeNode> tnlist = new ArrayList<TreeNode>();
         for (Dict dict : dicts) {
             TreeNode node = new TreeNode();
             node.setText(dict.getName());
@@ -38,16 +32,13 @@ public class DictServiceImpl extends BaseServiceImpl implements DictService {
             nodelist.put(node.getId(), node);
         }
         // 构造树形结构
-        for (String id : nodelist.keySet()) {
-            TreeNode node = nodelist.get(id);
-            if (StrUtil.isEmpty(node.getParentId())) {
-                tnlist.add(node);
-            } else {
-                if (nodelist.get(node.getParentId()).getNodes() == null)
-                    nodelist.get(node.getParentId()).setNodes(new ArrayList<TreeNode>());
-                nodelist.get(node.getParentId()).getNodes().add(node);
-            }
-        }
+        List<TreeNode> tnlist = TreeUtil.getNodeList(nodelist);
         return tnlist;
+    }
+
+    public List<Dict> getDictsByCode(String code){
+        String hql="from Dict where code='"+code+"'";
+        Dict dict=this.get(hql);
+        return this.find("from Dict where parentId='"+dict.getId()+"' order by levelCode");
     }
 }

@@ -26,4 +26,16 @@ public @interface Header {
      */
     String format() default "";
 
+    /**
+     * 关联类
+     */
+    Class joinClass() default Exception.class;
+
+    /**
+     * 数据来源
+     */
+    String dataSource() default "";
+
+
+
 }

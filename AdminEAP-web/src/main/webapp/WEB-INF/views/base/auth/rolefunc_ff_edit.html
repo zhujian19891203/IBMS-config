@@ -90,6 +90,8 @@
 	var form = null;
 	var id="${id?default(0)}";
 	$(function() {
+		//初始化控件
+		form=$("#ff-form").form();
 		//数据校验
 		$("#ff-form").bootstrapValidator({
 			message : '请输入有效值',
@@ -162,8 +164,7 @@
 				}
 			}
 		});
-		//初始化控件
-		form=$("#ff-form").form();
+		form.initComponent();
 		//回填id		
 		if(id!="0"){
 			ajaxPost(basePath+"/rolefunc/ff/get/"+id,null,function(data){

@@ -281,18 +281,20 @@ public class QueryUtil {
      */
     private static Object getValueForBetween(Object value, Class clazz) throws Exception {
         String[] values = value.toString().split(",");
-        if(values.length!=2)
-            throw new QueryException("getValueForBetween方法异常，参数【"+value.toString()+"】不正确");
+        List list = new ArrayList();
         if (StrUtil.isEmpty(values[0]) && StrUtil.isEmpty(values[1])) {
             return null;
         }
-        List list = new ArrayList();
         for (String s : values) {
             if (StrUtil.isEmpty(s)) {
                 list.add(null);
             } else {
                 list.add(JSonHelper.getValue(clazz, s));
             }
+        }
+        //只选取了开始时间
+        if(values.length==1){
+            list.add(null);
         }
         return list;
     }
@@ -372,7 +374,7 @@ public class QueryUtil {
         if (Date.class.equals(clazz) || Date.class.equals(clazz.getSuperclass())) {
             try {
                 //时间处理可能改变操作符 比如EQ 变成 BETWEEN
-                Map<String, Object> date_map = getValueForDate(operator, value);
+                Map<String, Object> date_map = getValueForDate(operator, newValue);
                 newValue = date_map.get("value");
                 operator = (ConditionOperator) date_map.get("operator");
             } catch (Exception ex) {

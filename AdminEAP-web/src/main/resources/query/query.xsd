@@ -57,6 +57,11 @@
 												<enumeration value="java.lang.Double" />
 												<enumeration value="String" />
 												<enumeration value="Date" />
+												<enumeration value="Integer" />
+												<enumeration value="Float" />
+												<enumeration value="Double" />
+												<enumeration value="BigDecimal" />
+												<enumeration value="Boolean" />
 											</restriction>
 										</simpleType>
 									</attribute>

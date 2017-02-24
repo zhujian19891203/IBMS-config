@@ -47,42 +47,25 @@
 	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
 
 
-	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
-	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>application/json;charset=UTF-8</value>
-			</list>
-		</property>
-		<property name="objectMapper">
-			<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-				<property name="serializationInclusion">
-					<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
-				</property>
-			</bean>
-		</property>
-	</bean>
-
-	<!--   为了解决乱码问题，需要添加如下配置，并且这里可以显示的添加MappingJacksonHttpMessageConverter这个转换器。  -->
-	<!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="mappingJacksonHttpMessageConverter" />&lt;!&ndash; json转换器 &ndash;&gt;
-			</list>
-		</property>
-	</bean>-->
-
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
 			<list>
 				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
 					<property name="supportedMediaTypes">
 						<list>
-							<value>text/plain;charset=UTF-8</value>
+							<value>text/html; charset=UTF-8</value>
+							<value>application/json;charset=UTF-8</value>
 						</list>
 					</property>
 				</bean>
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html; charset=UTF-8</value>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
 			</list>
 		</property>
 	</bean>
@@ -94,7 +77,7 @@
 	<mvc:view-controller path="/" view-name="forward:/login" />
 	<!--&lt;!&ndash; 静态资源映射 &ndash;&gt; -->
 
-<!--	<mvc:resources location="/resources" mapping="/resources/**" />-->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
 	<!-- 当上面要访问的静态资源不包括在上面的配置中时，则根据此配置来访问 -->
 	<mvc:default-servlet-handler />
 
