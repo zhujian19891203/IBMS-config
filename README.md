@@ -9,11 +9,12 @@ Introduction
 
 **下载 & 预览 [AdminEAP］(http://www.admineap.com)**　                               
 
-AdminEAP官网[http://www.admineap.com](http://www.admineap.com)
+AdminEAP官网：[http://www.admineap.com](http://www.admineap.com)
 
 
 What AdminEAP looks like (can do) ?
 ===========
+!["Bootstrap DataTable"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/homepage.png "User DataTable-user list")
 
 **Bootstrap DataTable**
 
