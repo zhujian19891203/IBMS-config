@@ -18,8 +18,8 @@ AdminEAP官网：[http://www.admineap.com](http://www.admineap.com)
 What AdminEAP looks like (can do) ?
 ===========
 AdminEAP HomePage:
-
-!["AdminEAP 官网"] (https://raw.githubusercontent.com/bill1012/Java-AdminLTE/master/doc/images/homepage.png "AdminEAP homePage")
+                   
+![AdminEAP 官网](https://raw.githubusercontent.com/bill1012/Java-AdminLTE/master/doc/images/homepage.png "AdminEAP homePage")
 
 - Component 组件集成
 - CURD Demo 增删改查
