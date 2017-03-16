@@ -11,6 +11,9 @@ Introduction
 
 AdminEAP官网：[http://www.admineap.com](http://www.admineap.com)
 
+在项目部署时如出现问题，请联系作者 QQ:475572229 或者发送邮件至 admin@admineap.com。
+
+如果支持该项目也可通过下面微信和支付宝捐赠，捐赠者将优先获得技术支持。
 
 What AdminEAP looks like (can do) ?
 ===========
@@ -78,7 +81,7 @@ Features
 Donate 捐赠
 ==================
 if you support admineap, you can donate to me,thanks。
-如果你想支持AdminEAP框架，您可以通过以下渠道捐赠支持，谢谢。
+如果你想支持AdminEAP框架，保证AdminEAP框架持续运行，您可以通过以下渠道捐赠支持，请在捐赠时留言，捐赠者将优先获得技术支持。
 !["Donate To billJiang"] (https://raw.githubusercontent.com/bill1012/AdminEAP/master/doc/images/donate.png "donate to billJiang")
 
 
