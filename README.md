@@ -11,7 +11,7 @@ Introduction
 
 AdminEAP官网：[http://www.admineap.com](http://www.admineap.com)
 
-在项目部署时如出现问题，请联系作者 QQ:475572229 或者发送邮件至 admin@admineap.com。
+在项目部署时如出现问题，请加QQ群:346837703，或者发送邮件至 admin@admineap.com。
 
 如果支持该项目也可通过下面微信和支付宝捐赠，捐赠者将优先获得技术支持。
 
