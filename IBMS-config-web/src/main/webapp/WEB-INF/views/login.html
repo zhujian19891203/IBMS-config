@@ -150,16 +150,15 @@
 
         //使用本地缓存记住用户名密码
         function rememberMe(rm_flag){
+            localStorage.userName=$("input[name='userName']").val();
+            localStorage.password=$("input[name='password']").val();
+
             //remember me
             if(rm_flag){
-                 localStorage.userName=$("input[name='userName']").val();
-                 localStorage.password=$("input[name='password']").val();
                 localStorage.rememberMe=1;
             }
             //delete remember msg
             else{
-                localStorage.userName=null;
-                localStorage.password=null;
                 localStorage.rememberMe=0;
             }
         }

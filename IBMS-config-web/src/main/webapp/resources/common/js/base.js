@@ -214,7 +214,7 @@ function getNextCode(prefix,maxCode,length){
  * 收缩左边栏时，触发markdown编辑的resize
  */
 $("[data-toggle='offcanvas']").click(function(){
-	if(editor){
+	if(editor !== undefined){
 		setTimeout(function(){editor.resize()},500);
 	}
 });

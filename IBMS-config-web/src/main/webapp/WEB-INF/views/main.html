@@ -74,7 +74,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="${basePath}/resources/adminlte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="${basePath}/resources/common/images/avatar.jpg" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>Alexander Pierce</p>
@@ -82,15 +82,14 @@
                     </div>
                 </div>
                 <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
+            <!--    <form action="#" method="get" class="sidebar-form">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
                     </div>
-                </form>
+                </form>-->
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
@@ -142,6 +141,9 @@
     <script type="text/javascript" src="${basePath}/resources/common/js/base-datasource.js"></script>
     <!-- 加入页面的的脚本 -->
     <script>
+    //加载用户名
+    $(".pull-left.info p").text(localStorage.userName);
+
     //加载菜单
     ajaxPost(basePath + "/function/all", null, function(data) {
         var $li, $menu_f_ul;
@@ -159,7 +161,6 @@
                 $("ul.sidebar-menu").append($li);
             } else if (item.levelCode.length == 12) {
                 $menu_s=$('<li><a href="#" data-url="${basePath}'+item.url+'"><i class="'+item.icon+'"></i>'+item.name+'</a></li>');
-              //  $menu_s = $('<li><a href="${basePath}' + item.url + '.html"><i class="' + item.icon + '"></i>' + item.name + '</a></li>');
                 $menu_f_ul.append($menu_s);
             }
         });
@@ -171,6 +172,7 @@
         //loadPage("${basePath}/generator/setting");
         //loadPage("${basePath}/markdown/preview?id=402880e958ecdff60158ed0c62ba0001")
         $("a[data-url]").click(function(evt) {
+            console.log($(this).data("url"));
             loadPage($(this).data("url"));
             $("ul.treeview-menu li").removeClass("active");
             $(this).parent().addClass("active");

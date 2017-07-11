@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="${basePath}/resources/common/libs/jsoneditor/jsoneditor.min.css">
+
+<section class="content-header">
+    <h1>
+        <span>巡逻路径</span>
+        <small id="title_sm">编辑</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="${basePath}"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">系统配置</a></li>
+        <li class="active">巡逻路径</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row form-horizontal">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <div id="jsoneditorDiv"></div>
+                    <div style="width: 100px; height: 36px; background: rgb(56, 131, 250); position: absolute; top: 10px; right: 10px;"></div>
+                    <button class="btn-small" id="submitJSON" style="position: absolute; top: 15px; right: 18px; "><i class="fa fa-save">&nbsp;保存</i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="${basePath}/resources/common/libs/jsoneditor/jsoneditor.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        // set height for json editor
+        var clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+        $("#jsoneditorDiv").css("height", clientHeight);
+
+        // create the editor
+        var container = document.getElementById("jsoneditorDiv");
+        var options = {
+            "modes": ["code", "tree"],
+            "mode": "code",
+            "indentation": 4,
+            "search": false,
+            "onModeChange": function(newMode, oldMode) {
+                if(newMode == "tree") {
+                    editor.expandAll();
+                }
+            }
+        };
+        var editor = new JSONEditor(container, options);
+
+        var obj_json_patrolpath = {};
+        // get json data from server
+        ajaxPost(basePath+"/jsoneditor/patrolpath/get",null,function(result){
+            obj_json_patrolpath = result;
+            editor.set(JSON.parse(result.content));         
+        });
+
+        // save json data to server
+        $("#submitJSON").click(function(){
+            try {
+                var obj = {};
+                obj["id"] = obj_json_patrolpath["id"];
+                obj["content"] = JSON.stringify(editor.get());
+
+                ajaxPost(basePath+"/jsoneditor/patrolpath/save",obj,function(result){
+                    if(result.success){
+                        modals.info("保存成功");
+                    }
+                });
+            }
+            catch(err) {
+                modals.error("Json格式错误，请更正");
+            }
+        });
+    });
+</script>

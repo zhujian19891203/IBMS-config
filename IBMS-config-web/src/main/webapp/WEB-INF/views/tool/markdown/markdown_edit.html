@@ -66,7 +66,7 @@
                     </div>
                     </div>
                 </div>
-                <div clas="box-body">
+                <div class="box-body">
                     <div id="editormd">
                         <textarea style="display:none;"></textarea>
                     </div>
@@ -246,6 +246,7 @@
             obj_md["keywords"]=$("#keywords").val();
             obj_md["title"]=$("#title").val();
             obj_md["id"]="${id?default('')}";
+            console.log(obj_md);
             ajaxPost(basePath+"/markdown/save",obj_md,function(result){
                 if(result.success){
                     modals.info("保存成功");
