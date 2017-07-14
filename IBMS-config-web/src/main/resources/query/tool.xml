@@ -11,4 +11,30 @@
 		<column key="keywords" header="关键字" operator="eq" width="150" />
 	    <column key="operator" id="id" header="操作" align="center" fnRender="fnRenderOperator"/>
 	</query>
+
+	<!-- 摄像头信息列表 -->
+	<query id="camera_list" key="id" tableName="摄像头列表" className="com.morxeen.tool.excelimporter.entity.ExcelImporterCamera"
+		pageSize="10" widthType="px" order="orderIndex asc">
+		<column key="id" header="id" hidden="true" />
+		<column key="sheetName" header="表单名" width="80" operator="like" allowSort="true" />
+		<column key="serialNumber" header="编号" width="80" />
+		<column key="name" header="名字" width="80" operator="like" />
+		<column key="url" header="链接" width="80" />
+		<column key="type" header="型号" width="80" />
+		<column key="port" header="端口" width="80" />
+		<column key="username" header="帐号" width="80" />
+		<column key="password" header="密码" width="80" />
+	</query>
+
+	<!-- 楼控信息列表 -->
+	<query id="buildingdevice_list" key="id" tableName="楼控列表" className="com.morxeen.tool.excelimporter.entity.ExcelImporterBuildingDevice"
+		pageSize="10" widthType="px" order="orderIndex asc">
+		<column key="id" header="id" hidden="true" />
+		<column key="sheetName" header="表单名" width="80" operator="like" allowSort="true" />
+		<column key="location" header="位置" width="80" />
+		<column key="devicenameOrObjectname" header="监控设备与项目" width="80" operator="like" />
+		<column key="deviceidOrObjectid" header="监控设备与项目ID" width="80" />
+		<column key="objectType" header="项目类型" width="80" render="-1=,0=Binary Input,1=Binary Output,2=Analog Input,3=Analog Output" />
+		<column key="sensor" header="传感器或执行机构" width="80" />
+	</query>
 </queryContext>

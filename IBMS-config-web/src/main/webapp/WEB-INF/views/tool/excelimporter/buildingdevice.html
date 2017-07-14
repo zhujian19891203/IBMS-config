@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="${basePath}/resources/common/libs/bootstrap-fileinput/css/fileinput.min.css" />
+
 <section class="content-header">
     <h1>
         <span>楼控信息</span>
@@ -9,3 +11,106 @@
         <li class="active">楼控信息</li>
     </ol>
 </section>
+
+<section class="content">
+    <div class="row form-horizontal">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+				<div class="box-header">
+					<div style="padding-bottom: 6px;">请选择楼控配置Excel文件</div>
+					<input id="fileSelectorIpt" type="file" />
+				</div>
+                <div class="box-body">
+					<div class="dataTables_filter" id="searchDiv">
+						<input placeholder="请输入表单名" name="sheetName" class="form-control" type="search" likeOption="true" /> 
+						<input placeholder="请输入名字" name="name" class="form-control" type="search" likeOption="true" />
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary" data-btn-type="search">查询</button>
+							<button type="button" class="btn btn-default" data-btn-type="reset">重置</button>
+						</div>
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" data-btn-type="add">新增</button>
+							<button type="button" class="btn btn-default" data-btn-type="edit" >编辑</button>
+							<button type="button" class="btn btn-default" data-btn-type="delete">删除</button>
+						</div>	
+					</div>
+					<table id="buildingdevice_table" class="table table-bordered table-striped table-hover"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="${basePath}/resources/common/libs/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script type="text/javascript" src="${basePath}/resources/common/libs/bootstrap-fileinput/js/locales/zh.js"></script>
+<script type="text/javascript">
+	$("#fileSelectorIpt").fileinput({
+		'language': 'zh',
+		'showPreview': false,
+		'maxFilesNum': 1,
+		'maxFileCount': 1,
+		'allowedFileExtensions': ['xls', 'xlsx'],
+		'autoReplace': true,
+		'uploadUrl': basePath + "/excelimporter/buildingdevice/upload"
+	})
+	.on("fileuploaded", function(event, data){
+		buildingdeviceTable.reloadData();
+	})
+	.on("fileuploaderror", function(event, data, msg) {
+		modals.error(msg);
+	});
+
+	//tableId,queryId,conditionContainer
+	var buildingdeviceTable;
+	var winId="buildingdeviceWin";
+	$(function() { 
+		//init table and fill data
+		buildingdeviceTable = new CommonTable("buildingdevice_table", "buildingdevice_list", "searchDiv");
+		buildingdeviceTable.rowSpan("buildingdevice_table", [1, 2]);
+		
+		//button event
+		$('button[data-btn-type]').click(function() {
+			var action = $(this).attr('data-btn-type');
+			var rowId=buildingdeviceTable.getSelectedRowId();
+			switch (action) {
+			case 'add':
+                   modals.openWin({
+                   	winId:winId,
+                   	title:'新增楼控设备',
+                   	width:'900px',
+                   	url:basePath+"/excelimporter/buildingdevice/edit"
+                   });                        
+				break;
+			case 'edit':
+				if(!rowId){
+					modals.info('请选择要编辑的行');
+					return false;
+				}
+				modals.openWin({
+                   	winId:winId,
+                   	title:'编辑楼控设备【'+buildingdeviceTable.getSelectedRowData().devicenameOrObjectname+'】',
+                   	width:'900px',
+                   	url:basePath+"/excelimporter/buildingdevice/edit?id="+rowId
+                   }); 
+			   break;
+			case 'delete':
+				if(!rowId){
+					modals.info('请选择要删除的行');
+					return false;
+				}
+				modals.confirm("是否要删除该行数据？",function(){
+					ajaxPost(basePath+"/excelimporter/buildingdevice/delete/"+rowId,null,function(data){
+						if(data.success){
+							buildingdeviceTable.reloadRowData();
+						}else{
+							modals.error("用户数据被引用，不可删除！");
+						}
+					});
+				})
+				break;
+			}
+
+		});
+		//form_init();
+	})
+</script>

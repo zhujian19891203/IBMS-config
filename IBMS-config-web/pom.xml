@@ -19,7 +19,7 @@
             <artifactId>IBMS-config-framework</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>system</scope>
-            <systemPath>/Users/zhujian/Documents/IBMS-RELEATED/IBMS-config/IBMS-config-framework/target/IBMS-config-framework.jar</systemPath>
+            <systemPath>${project.basedir}\..\IBMS-config-framework\target\IBMS-config-framework.jar</systemPath>
         </dependency>
         <!-- spring -->
         <dependency>

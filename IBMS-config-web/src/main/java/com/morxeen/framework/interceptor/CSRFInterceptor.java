@@ -34,6 +34,9 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
         System.out.println("---------->" + request.getRequestURI());
         //System.out.println(request.getHeader("X-Requested-With"));
         // 提交表单token 校验
+        if(!(handler instanceof HandlerMethod)) {
+            return false;
+        }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         VerifyCSRFToken verifyCSRFToken = method.getAnnotation(VerifyCSRFToken.class);
@@ -81,6 +84,9 @@ public class CSRFInterceptor extends HandlerInterceptorAdapter {
             }
         }
         // 刷新token
+        if(!(handler instanceof HandlerMethod)) {
+            return;
+        }
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
         RefreshCSRFToken refreshAnnotation = method.getAnnotation(RefreshCSRFToken.class);

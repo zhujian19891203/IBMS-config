@@ -81,7 +81,7 @@ public class EncryptUtil {
 
     public static void main(String[] args) {
 
-        System.out.println(getPassword("asd725824","zhujian19891203"));
+        System.out.println(getPassword("admin","admin"));
     }
 
 

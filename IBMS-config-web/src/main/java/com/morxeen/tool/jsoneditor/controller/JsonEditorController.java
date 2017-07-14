@@ -26,7 +26,7 @@ public class JsonEditorController {
     @RequestMapping(value = "/tabinfo/get", method = RequestMethod.POST)
     @ResponseBody
     public JsonEditorTabinfo tabinfoGet() {
-        return baseService.get("from JsonEditorTabinfo");
+        return baseService.get("FROM JsonEditorTabinfo");
     }
 
     @RequestMapping(value = "/tabinfo/save", method = RequestMethod.POST)
@@ -49,7 +49,7 @@ public class JsonEditorController {
     @RequestMapping(value = "/patrolpath/get", method = RequestMethod.POST)
     @ResponseBody
     public JsonEditorPatrolpath patrolpathGet() {
-        return baseService.get("from JsonEditorPatrolpath");
+        return baseService.get("FROM JsonEditorPatrolpath");
     }
 
     @RequestMapping(value = "/patrolpath/save", method = RequestMethod.POST)
